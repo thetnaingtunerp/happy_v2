@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import AnonymousUser
 from django.db.models import Sum,Count,F
 from django.http import HttpResponse
-from django.views.generic import TemplateView, View, CreateView, DetailView,FormView
+from django.views.generic import TemplateView, View, CreateView, DetailView,FormView,ListView
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -281,3 +281,78 @@ class UnpackageView(View):
 
         return redirect('myapp:MyCartView')
 
+
+class InvoicesView(UserRequiredMixin,TemplateView):
+    template_name = 'InvoicesView.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart_id = self.request.session.get('cart_id', None)
+        if cart_id:
+            cart = Cart.objects.get(id=cart_id)
+        else:
+            cart = None
+        message = 1
+        context['message'] = message
+        context['cart'] = cart
+        context['product_list'] = Item.objects.all().order_by('-id')
+        context['queryset'] = Order.objects.filter(created_at=datetime.date.today()).order_by('-id')
+
+        return context
+
+
+
+# ================= xhtml2pdf ===============
+def pdf_invoice_create(request,id):
+    ord_obj = Order.objects.get(id=id)
+    template_path = 'pdf_invoice.html'
+    context = {'ord_obj':ord_obj}
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="invoice.pdf"'
+    template = get_template(template_path)
+    html = template.render(context)
+
+    pisa_status = pisa.CreatePDF(
+        html,dest=response,
+    )
+    if pisa_status.err:
+        return HttpResponse('have a error pdf')
+    return response
+    
+class InvoiceDetailView(UserRequiredMixin,DetailView):
+    template_name = 'invoicedetail.html'
+    model = Order
+    context_object_name = 'ord_obj'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context['allstatus'] = STATUS
+
+        return context
+
+
+class InvoiceThermalPrintView(DetailView):
+    template_name = 'test_slip.html'
+    model = Order
+    context_object_name = 'ord_obj'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context['allstatus'] = STATUS
+
+        return context
+
+
+# ================================= Report ==================================
+ 
+    
+
+class SaleReportView(ListView): 
+   
+    # specify the model for list view 
+    model = Order 
+    template_name = 'SaleReportView.html'
+   
+    def get_queryset(self, *args, **kwargs): 
+        qs = super(SaleReportView, self).get_queryset(*args, **kwargs) 
+        qs = qs.order_by("-id") 
+        return qs

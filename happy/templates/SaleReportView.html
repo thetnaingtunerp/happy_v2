@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!-- Export Datatable start -->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Invoice List</h4>
+    </div>
+    <div class="pb-20">
+        <table
+                class="table hover data-table-export nowrap"
+        >
+            <thead>
+            <tr class="">
+                <th class="table-plus datatable-nosort">InvoiceNo</th>
+                <th>Amount</th>
+                <th>Member</th>
+                <th>Date</th>
+                <th>Payment</th>
+				<th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in object_list %}
+            <tr class="">
+                <td class="table-plus"> <a href="#">{{p.id}}</a></td>
+                <td><a href="#"><strong>{{p.total}}</strong></a></td>
+               
+                {% if p.member %}
+                <td>{{p.member}}</td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+                <td>{{p.created_at}}</td>
+                <td>
+                    {{p.payment}}
+                    </td>
+					<td><a href="{% url 'myapp:InvoiceDetailView' p.id %}" class="btn btn-sm btn-outline-info">details</a></td>
+
+            </tr>
+            {% endfor %}
+
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td>Grand Total</td>
+                <!--                <td><strong>{{sum}}</strong></td>-->
+                <td></td>
+                <td></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<!-- Export Datatable End -->
+{% comment %} <ul> 
+	<!-- Iterate over object_list -->
+	{% for object in object_list %} 
+	<!-- Display Objects -->
+	<li>{{ object.id }}</li> 
+	<li>{{ object.cart }}</li> 
+
+	<hr/> 
+	<!-- If object_list is empty -->
+	{% empty %} 
+	<li>No objects yet.</li> 
+	{% endfor %} 
+</ul> {% endcomment %}
+
+
+
+{% endblock content %}

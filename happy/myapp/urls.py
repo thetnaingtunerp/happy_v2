@@ -16,8 +16,14 @@ urlpatterns = [
     path('AddtoCart/', AddtoCart.as_view(), name='AddtoCart'),
     path('manage/<int:cp_id>/', ManageCartView.as_view(), name='ManageCartView'),
     path('checkout/', CheckoutView.as_view(), name='CheckoutView'),
+    path('InvoicesView/', InvoicesView.as_view(), name='InvoicesView'),
+
+    path('pdf_invoice_create/<int:id>/', pdf_invoice_create, name='pdf_invoice_create'),
+    path('InvoiceDetailView/<int:pk>/', InvoiceDetailView.as_view(), name='InvoiceDetailView'),
+    path('InvoiceThermalPrintView/<int:pk>/', InvoiceThermalPrintView.as_view(), name='InvoiceThermalPrintView'),
 
 
     #report
+    path('SaleReportView/', SaleReportView.as_view(), name='SaleReportView'),
 
 ]

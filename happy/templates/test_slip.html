@@ -22,22 +22,40 @@ table {
 
 td.description,
 th.description {
-    width: 75px;
-    max-width: 75px;
+    width: 300px;
+    max-width: 300px;
+}
+td.sn,
+th.sn {
+    width: 20px;
+    max-width: 20px;
 }
 
 td.quantity,
 th.quantity {
-    width: 40px;
-    max-width: 40px;
+    width: 80px;
+    max-width: 80px;
     word-break: break-all;
 }
 
 td.price,
 th.price {
-    width: 40px;
-    max-width: 40px;
+    width: 100px;
+    max-width: 100px;
     word-break: break-all;
+}
+
+td.unit,
+th.unit {
+    width: 100px;
+    max-width: 100px;
+    word-break: break-all;
+}
+
+td.rmk,
+th.rmk {
+    width: 50px;
+    max-width: 50px;
 }
 
 .centered {
@@ -46,8 +64,8 @@ th.price {
 }
 
 .ticket {
-    width: 155px;
-    max-width: 155px;
+    width: 786px;
+    max-width: 768px;
 }
 
 img {
@@ -67,7 +85,7 @@ img {
     <body>
         <div class="ticket">
 
-            <p class="centered">BESTBUY IN RANGOON
+            <p class="centered">Hapy
                 <br>09-941844742
                 <br>No.8,Maha_Bawga_Street, Kamayaut, Yangon</p>
             <hr>
@@ -80,17 +98,26 @@ img {
             <table>
                 <thead>
                     <tr>
-                        <th class="quantity">Qty</th>
+                        <th class="sn">SN</th>
                         <th class="description">ItemName</th>
-                        <th class="price">Amount</th>
+                        <th class="price">Price</th>
+                        <th class="qty">Qty</th>
+                        <th class="unit">Unit</th>
+                        <th class="subtotal">Amount</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
                 {% for p in ord_obj.cart.cartproduct_set.all %}
                     <tr>
-                        <td class="quantity">{{p.quantity}}</td>
-                        <td class="description">{{p.product.item_name}}</td>
-                        <td class="price">{{p.subtotal}}</td>
+                        <td class="sn">{{forloop.counter}}</td>
+                        <td class="description">{{p.product.itemname}}</td>
+                        <td class="price">{{p.rate}}</td>
+                        <td class="qty">{{p.quantity}}</td>
+                        <td class="unit">{{p.product.iunit}}</td>
+                        <td class="subtotal">{{p.subtotal}}</td>
+                        
+
                     </tr>
                 {% endfor %}
                     <tr>

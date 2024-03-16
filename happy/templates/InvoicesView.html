@@ -1,0 +1,61 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!-- Export Datatable start -->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Invoice List</h4>
+    </div>
+    <div class="pb-20">
+        <table
+                class="table hover data-table-export nowrap"
+        >
+            <thead>
+            <tr class="">
+                <th class="table-plus datatable-nosort">Customer Name</th>
+                <th>Invoice No</th>
+                <th>Member</th>
+                <th>Date</th>
+                <th>status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in queryset %}
+            <tr class="">
+                <td class="table-plus">{{p.ordered_by}}</td>
+                <td><a href="#"><strong>{{p.id}}</strong></a></td>
+                {% comment %} <td><a href="{% url 'myapp:pdf_invoice_create' p.id%}"><strong>{{p.id}}</strong></a></td> {% endcomment %}
+                {% if p.member %}
+                <td>{{p.member}}</td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+                <td>{{p.created_at}}</td>
+                <td>
+                    <a href="{% url 'myapp:InvoiceThermalPrintView' p.id%}" target="_blank" class="btn btn-sm btn-danger">Print</a>
+                    </td>
+
+            </tr>
+            {% endfor %}
+
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td>Grand Total</td>
+                <!--                <td><strong>{{sum}}</strong></td>-->
+                <td></td>
+                <td></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<!-- Export Datatable End -->
+
+
+{% endblock content %}
