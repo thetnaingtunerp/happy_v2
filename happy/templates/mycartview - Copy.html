@@ -1,0 +1,257 @@
+{% extends 'dbase.html' %}
+
+{% block content %}
+{% if message == 1 %}
+{% else %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}!</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+
+
+<div class="card-box mb-30">
+    <div class="pb-20">
+        <table class="table stripe hover nowrap">
+            <thead>
+            <tr>
+                <th>SN</th>
+                <th>Item Name</th>
+
+                <th>Rate</th>
+                <th  class="text-right">Quantity</th>
+                <th>Unit</th>
+                <th>Subtotal</th>
+                {% if cart.cartproduct_set.all %}
+                <th>Edit</th>
+                {% endif %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in cart.cartproduct_set.all %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>
+                    <a href="#">{{p.product.itemname}}</a>
+
+
+                </td>
+
+                <td>{{p.rate}}</td>
+                <td class="text-right">{{p.quantity}}</td>
+                <td>{{p.product.iunit}}</td>
+                <td>{{p.subtotal}}</td>
+                <td>
+                    <a href="{% url 'myapp:ManageCartView' p.id %}?action=rmv"
+                       class="btn btn-sm btn-outline-danger"><i class="icon-copy dw dw-delete-3"></i></a>
+                </td>
+
+            </tr>
+            {% endfor %}
+
+            <tr>
+                <td colspan="5" class="text-right">Amount :</td>
+                <td>{{cart.total}}</td>
+                {% if cart.cartproduct_set.all %}
+                <td></td>
+                {% endif %}
+
+            </tr>
+
+            <tr>
+                <td colspan="5" class="text-right">Total :</td>
+                <td>{{cart.total}}</td>
+                {% if cart.cartproduct_set.all %}
+                <td><a href="{% url 'myapp:CheckoutView' %}" class="btn btn-sm btn-primary">Check Out Detail</a>
+                </td>
+                {% endif %}
+
+            </tr>
+
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card-box mb-30">
+    <div class="pd-20">
+		<h4 class="text-blue h4">Items in Shop</h4>
+    </div>
+
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="">
+                <th class="table-plus datatable-nosort">Item Name</th>
+               
+                <th>Category</th>
+                <th>Sale Price</th>
+                <!-- <th>Balance Qty</th> -->
+                <th>Add to Cart</th>
+                
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in product_list %}
+            <tr>
+                <td class="table-plus"><a href="#"><h6 class="text-blue">
+                    {{p.itemname}} <span class="text-danger">({{p.iunit}})</span> </h6></a></td>
+                
+                <td>{{p.category}}</td>
+                <td>{{p.saleprice}}</td>
+                <!-- <td>
+                    <div class="row">
+                        {{p.stockbalance}}
+
+
+                    </div>
+
+                </td> -->
+
+                <td>
+
+                    {% if p.stockbalance <= 1 %}
+                        <a href="#" class="btn btn-sm btn-outline-danger" >out of stock</a>
+                    {% else %}
+
+                            <a
+                                href="#"
+                                class="btn btn-sm btn-success"
+                                data-toggle="modal"
+                                data-target="#Medium-modal-{{p.id}}"
+                                type="button"
+                            >
+                               Add to List
+                            </a>
+                            <div
+                                class="modal fade"
+                                id="Medium-modal-{{p.id}}"
+                                tabindex="-1"
+                                role="dialog"
+                                aria-labelledby="myLargeModalLabel"
+                                aria-hidden="true"
+                            >
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myLargeModalLabel">
+                                                {{p.item_name}}
+                                            </h4>
+                                            <button
+                                                type="button"
+                                                class="close"
+                                                data-dismiss="modal"
+                                                aria-hidden="true"
+                                            >
+                                                ×
+                                            </button>
+                                        </div>
+                                        <form action="{% url 'myapp:AddtoCart' %}" method="post">
+                                            {% csrf_token %}
+                                        <div class="modal-body">
+                                            <input type="text" value="{{p.id}}" name="pid" hidden>
+                                            <input type="number" name="quantity" class="form-control" value="1">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button
+                                                type="button"
+                                                class="btn btn-secondary"
+                                                data-dismiss="modal"
+                                            >
+                                                Close
+                                            </button>
+                                            <button type="submit" class="btn btn-success">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% endif %}
+
+                </td>
+                <!-- <td>
+                    {% if p.superitem %}
+                    <form action="{% url 'myapp:UnpackageView' %}" method="post">{% csrf_token %}
+                        <input type="text" value="{{p.id}}" name="pid" hidden>
+                        <button type="submit" class="btn btn-sm btn-warning"><span class="micon bi bi-gift-fill"></span></button>
+                    </form>
+                    {% endif %}
+                </td> -->
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Export Datatable start -->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Invoice List</h4>
+    </div>
+    <div class="pb-20">
+        <table
+                class="table hover data-table-export nowrap"
+        >
+            <thead>
+            <tr class="">
+                <th class="table-plus datatable-nosort">Invoice No</th>
+                <th>Amount</th>
+                <th>Member</th>
+                <th>Date</th>
+                <th>status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in queryset %}
+            <tr class="">
+                <td class="table-plus">{{p.id}}</td>
+                <td><a href="#"><strong>{{p.total}}</strong></a></td>
+                {% comment %} <td><a href="{% url 'myapp:pdf_invoice_create' p.id%}"><strong>{{p.id}}</strong></a></td> {% endcomment %}
+                {% if p.member %}
+                <td>{{p.member}}</td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+                <td>{{p.created_at}}</td>
+                <td>
+                    <a href="{% url 'myapp:InvoiceThermalPrintView' p.id%}" target="_blank" class="btn btn-sm btn-danger">Print</a>
+                    </td>
+
+            </tr>
+            {% endfor %}
+
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                                <td><strong></strong></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<!-- Export Datatable End -->
+
+
+{% endblock content %}
+

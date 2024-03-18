@@ -34,3 +34,17 @@ class CheckoutForm(forms.ModelForm):
 
         }
 
+class AdminProductEditForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = ['itemname','category', 'iunit', 'saleprice', 'purchaseprice']
+        widgets = {
+            'itemname': forms.TextInput(attrs={'class': 'form-control'}),
+            'category': forms.TextInput(attrs={'class': 'form-control'}),
+            'iunit': forms.TextInput(attrs={'class': 'form-control'}),
+            'saleprice': forms.TextInput(attrs={'class': 'form-control'}),
+            'purchaseprice': forms.TextInput(attrs={'class': 'form-control'}),
+           
+
+        }
+

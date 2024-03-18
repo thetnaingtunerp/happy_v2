@@ -6,6 +6,9 @@ from django.contrib.auth.models import AnonymousUser
 from django.db.models import Sum,Count,F
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View, CreateView, DetailView,FormView,ListView
+# import generic UpdateView
+from django.views.generic.edit import DeleteView
+
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -23,11 +26,14 @@ from xhtml2pdf import pisa
 def test(request):
     return render(request, 'base.html')
 
+class DashboardView(TemplateView):
+    template_name = "dashboard.html"
+
 
 class UserLoginView(FormView):
     template_name = 'login.html'
     form_class = ULoginForm
-    success_url = reverse_lazy('myapp:MyCartView')
+    success_url = reverse_lazy('myapp:DashboardView')
 
     def form_valid(self, form):
         username = form.cleaned_data.get('username')
@@ -56,7 +62,7 @@ class UserRequiredMixin(object):
         return super().dispatch(request, *args, **kwargs)
 
 
-class CategoryCreate(View):
+class CategoryCreate(UserRequiredMixin, View):
     def get(self,request):
         category = Category.objects.all()
         item_list = Item.objects.all()
@@ -77,7 +83,7 @@ class CategoryCreate(View):
             message = 'please enter category name'
             return render(request, 'categorycreate.html', {'message':message,'category':category})
 
-class CreateMember(View):
+class CreateMember(UserRequiredMixin, View):
     def get(self, request):
         fm = MemberForm()
         m = Member.objects.all()
@@ -89,8 +95,14 @@ class CreateMember(View):
             fm.save()
         return redirect(request.META['HTTP_REFERER'])
 
+class UnitCreateView(View):
+    def post(self, request):
+        iunit = request.POST.get('iunit')
+        u = Unit(unit=iunit)
+        u.save()
+        return redirect(request.META['HTTP_REFERER'])
 
-class ProductCreate(View):
+class ProductCreate(UserRequiredMixin, View):
     def get(self,request):
         category = Category.objects.all()
         item_list = Item.objects.all()
@@ -120,6 +132,57 @@ class ProductCreate(View):
             return render(request, 'productcreate.html', context)
 
 
+class DashSetupView(UserRequiredMixin, View):
+    def get(self,request):
+        category = Category.objects.all()
+        item_list = Item.objects.all()
+        unt = Unit.objects.all()
+        message = None
+        context = {'item_list':item_list,'category':category,'message':message, 'unt':unt}
+        return render(request, 'dsetupview.html', context)
+    def post(self,request):
+        itemname = request.POST.get('itemname')
+        category = request.POST.get('category')
+        iunit = request.POST.get('iunit')
+        purchaseprice = request.POST.get('purchaseprice')
+        saleprice = request.POST.get('saleprice')
+        superitem = request.POST.get('superitem')
+        unpackqty = request.POST.get('unpackqty')
+
+        message = None
+        if not itemname:
+            message = 'please enter items'
+        if not message:
+            item = Item(itemname=itemname,category=category, iunit=iunit, saleprice=saleprice,purchaseprice=purchaseprice,superitem=superitem,unpackqty=unpackqty)
+            item.save()
+            return redirect(request.META['HTTP_REFERER'])
+        else:
+            category = Category.objects.all()
+            item_list = Item.objects.all()
+            context = {'message': message,'category':category,'item_list':item_list}
+            return render(request, 'productcreate.html', context)
+
+class ProductEditView(UserRequiredMixin,View):
+    def get(self,request, pk):
+        pi = Item.objects.get(id=pk)
+        fm = AdminProductEditForm(instance=pi)
+        return render(request,'productedit.html', {'form':fm})
+
+    def post(self, request, pk):
+        pi = Item.objects.get(id=pk)
+        fm = AdminProductEditForm(request.POST,instance=pi)
+        if fm.is_valid():
+            fm.save()
+        return redirect('myapp:DashSetupView')
+
+
+
+
+class ProductDeleteView(DeleteView):
+    model = Item
+    success_url = "/"
+    template_name= 'item_confirm_delete.html'
+
 
 class MyCartView(UserRequiredMixin,TemplateView):
     template_name = 'mycartview.html'
@@ -138,7 +201,7 @@ class MyCartView(UserRequiredMixin,TemplateView):
 
         return context
 
-class AddtoCart(View):
+class AddtoCart(UserRequiredMixin, View):
     def post(self, request):
         pid = request.POST.get('pid')
         qty = request.POST.get('quantity')
@@ -277,8 +340,6 @@ class UnpackageView(View):
         supitm = Item.objects.get(id=sup)
         supitm.stockbalance -=1
         supitm.save()
-
-
         return redirect('myapp:MyCartView')
 
 
@@ -330,7 +391,7 @@ class InvoiceDetailView(UserRequiredMixin,DetailView):
         return context
 
 
-class InvoiceThermalPrintView(DetailView):
+class InvoiceThermalPrintView(UserRequiredMixin, DetailView):
     template_name = 'test_slip.html'
     model = Order
     context_object_name = 'ord_obj'
@@ -343,10 +404,8 @@ class InvoiceThermalPrintView(DetailView):
 
 
 # ================================= Report ==================================
- 
-    
 
-class SaleReportView(ListView): 
+class SaleReportView(UserRequiredMixin, ListView): 
    
     # specify the model for list view 
     model = Order 
@@ -356,3 +415,22 @@ class SaleReportView(ListView):
         qs = super(SaleReportView, self).get_queryset(*args, **kwargs) 
         qs = qs.order_by("-id") 
         return qs
+
+
+
+
+################################# Purchase #######################################
+class PurchaseView(UserRequiredMixin,TemplateView):
+    template_name = 'PurchaseView.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart_pur = self.request.session.get('cart_pur', None)
+        if cart_pur:
+            pcart = pCart.objects.get(id=cart_pur)
+        else:
+            pcart = None
+        
+        context['pcart'] = pcart
+        context['product_list'] = Item.objects.all().order_by('-id')
+        # context['queryset'] = Order.objects.filter(created_at=datetime.date.today()).order_by('-id')
+        return context

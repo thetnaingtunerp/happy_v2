@@ -1,0 +1,24 @@
+{% extends 'dbase.html' %}
+
+{% block content %}
+
+<div class="card-box mb-30">
+    <div class="pd-20">
+
+<form method="post">{% csrf_token %}
+     
+ 
+ 
+ 
+    <p>Are you sure you want to delete <span class="text-danger">"{{ object }}"</span> ?</p>
+     
+     
+     
+     
+        <input type="submit" value="Yes, Confirm" class="btn btn-danger">
+    </form>
+
+    </div>
+</div>
+
+{% endblock content %}

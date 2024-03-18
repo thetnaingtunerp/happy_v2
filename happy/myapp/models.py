@@ -17,6 +17,11 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
+class Unit(models.Model):
+    unit = models.CharField(max_length=225)
+
+    def __str__(self):
+        return self.unit
 
 class Item(models.Model):
     itemname = models.CharField(max_length=255,blank=True, null=True)
@@ -80,8 +85,49 @@ class Order(models.Model):
         return "Order : " + str(self.id)
 
 
+#Purchase
+class pCart(models.Model):
+    staff = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    total = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.id)
+
+
+class pCartProduct(models.Model):
+    cart = models.ForeignKey(pCart, on_delete=models.CASCADE)
+    product = models.ForeignKey(Item, on_delete=models.CASCADE)
+    typeunit = models.CharField(max_length=255,null=True, blank=True)
+    rate = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField()
+    subtotal = models.PositiveIntegerField()
+    stockbalance = models.IntegerField()
+    created_at = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return "Cart : "+ str(self.cart.id)+ "CartProduct : " + str(self.id)
+
+
+class Supplier(models.Model):
+    name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255)
+    address = models.TextField(max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 
+class pOrder(models.Model):
+    cart = models.OneToOneField(pCart, on_delete=models.CASCADE)
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, blank=True, null=True)
+    created_at = models.DateField(auto_now_add=True)
+    discount = models.PositiveIntegerField(default=0)
+    total = models.PositiveIntegerField(default=0)
+    payment = models.CharField(max_length=225, choices=PAYMENT_TYPE, default='Cash')
+    created = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-
+    def __str__(self):
+        return "Order : " + str(self.id)

@@ -16,26 +16,31 @@ td,
 th,
 tr,
 table {
-    border-top: 1px solid black;
+    border: 2px solid black;
+
     border-collapse: collapse;
+    height: 50px;
 }
 
 td.description,
 th.description {
     width: 300px;
     max-width: 300px;
+    text-align: center;
+    align-content: center;
 }
 td.sn,
 th.sn {
-    width: 20px;
-    max-width: 20px;
+    width: 40px;
+    max-width: 40px;
 }
 
 td.quantity,
 th.quantity {
-    width: 80px;
-    max-width: 80px;
+    width: 100px;
+    max-width: 100px;
     word-break: break-all;
+    text-align: center;
 }
 
 td.price,
@@ -43,24 +48,33 @@ th.price {
     width: 100px;
     max-width: 100px;
     word-break: break-all;
+    text-align: right;
 }
 
 td.unit,
 th.unit {
-    width: 100px;
-    max-width: 100px;
+    width: 50px;
+    max-width: 50px;
     word-break: break-all;
 }
 
-td.rmk,
-th.rmk {
-    width: 50px;
-    max-width: 50px;
+td.subtotal,
+th.subtotal {
+    width: 100px;
+    max-width: 100px;
+    word-break: break-all;
+    text-align: right;
 }
+
 
 .centered {
     text-align: center;
     align-content: center;
+}
+
+
+.headtitle{
+    font-size: 20px;
 }
 
 .ticket {
@@ -84,8 +98,9 @@ img {
     </head>
     <body>
         <div class="ticket">
+           
 
-            <p class="centered">Hapy
+            <p class="centered headtitle">Hapy
                 <br>09-941844742
                 <br>No.8,Maha_Bawga_Street, Kamayaut, Yangon</p>
             <hr>
@@ -97,11 +112,11 @@ img {
             <hr>
             <table>
                 <thead>
-                    <tr>
+                    <tr style="background-color:yellowgreen;">
                         <th class="sn">SN</th>
                         <th class="description">ItemName</th>
                         <th class="price">Price</th>
-                        <th class="qty">Qty</th>
+                        <th class="quantity">Qty</th>
                         <th class="unit">Unit</th>
                         <th class="subtotal">Amount</th>
                         
@@ -113,7 +128,7 @@ img {
                         <td class="sn">{{forloop.counter}}</td>
                         <td class="description">{{p.product.itemname}}</td>
                         <td class="price">{{p.rate}}</td>
-                        <td class="qty">{{p.quantity}}</td>
+                        <td class="quantity">{{p.quantity}}</td>
                         <td class="unit">{{p.product.iunit}}</td>
                         <td class="subtotal">{{p.subtotal}}</td>
                         
@@ -121,33 +136,20 @@ img {
                     </tr>
                 {% endfor %}
                     <tr>
-                        <td class="quantity"></td>
-                        <td class="description">Total</td>
-                        <td class="price">{{ord_obj.total}}</td>
+                        <td class="sn"></td>
+                        <td colspan="4" style="text-align: right;"><strong>TOTAL </strong></td>
+                        <td class="subtotal">{{ord_obj.total}}</td>
                     </tr>
-                    <tr>
-                        <td class="quantity">1.00</td>
+                    <!-- <tr>
+                        <td class="quantity"></td>
                         <td class="description">Discount</td>
                         <td class="price">{{ord_obj.discount}}</td>
-                    </tr>
-                    <tr>
-                        <td class="quantity"></td>
-                        <td class="description">Delivery</td>
-                        <td class="price">{{ord_obj.delivery_fee}}</td>
-                    </tr>
-                    <tr>
-                        <td class="quantity"></td>
-                        <td class="description">Grand Total</td>
-                        <td class="price">{{ord_obj.all_total_delivery}}</td>
-                    </tr>
+                    </tr> -->
+                    
                 </tbody>
             </table>
-            {% if ord_obj.shipping_address %}
-            <p>DeliveryBy-:{{ord_obj.delivery_system}}</p>
-            <p class="centered">{{ord_obj.shipping_address}}
-                <br></p>
-            {% endif %}
-            <p class="centered">Thanks for your purchase!
+           
+            <p class="centered">ဝယ်ယူအားပေးမှု အတွက် အထူး ကျေးဇူးတင်ပါသည်
                 <br></p>
         </div>
         <button id="btnPrint" class="hidden-print">Print</button>

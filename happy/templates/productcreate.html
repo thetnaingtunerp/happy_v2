@@ -66,12 +66,27 @@
                     </select>
                     </div>
                 </div>
+
                 <div class="form-group row col-md-6">
-                    <label class="col-sm-12 col-md-12 col-form-label">Unit</label>
+                    <label class="col-sm-12 col-md-12 col-form-label">Unit/Type</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" type="text" placeholder="" name="iunit">
+                        <select
+                        class="custom-select2 form-control"
+                        name="superitem"
+                        style="width: 100%; height: 38px"
+                        data-style="btn-outline-primary"
+                    >
+                        <optgroup>
+                            <option value=""><a href="#">New Unit Type</a></option>
+                            {% for m in item_list %}
+                            <option value="{{m.id}}">{{m.itemname}}|{{m.iunit}}</option>
+                            {% endfor %}
+                        </optgroup>
+                        
+                    </select>
                     </div>
                 </div>
+                
             </div>
             <div class="row">
                 <div class="form-group row col-md-6">
