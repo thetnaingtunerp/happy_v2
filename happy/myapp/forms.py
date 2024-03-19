@@ -17,6 +17,18 @@ class MemberForm(forms.ModelForm):
             'address': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
+class SupplierForm(forms.ModelForm):
+    class Meta:
+        model = Supplier
+        fields = '__all__'
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+
+
 
 class CheckoutForm(forms.ModelForm):
     class Meta:
@@ -33,6 +45,27 @@ class CheckoutForm(forms.ModelForm):
             # 'id':forms.Textarea
 
         }
+
+
+
+class PurchaseCheckoutForm(forms.ModelForm):
+    class Meta:
+        model = pOrder
+        fields = ['supplier', 'discount','payment',]
+        widgets = {
+
+            'supplier': forms.Select(attrs={'class':'form-control custom-select2 col-md-6'}),
+            'discount': forms.NumberInput(attrs={'class': 'form-control col-md-4'}),
+            'payment': forms.Select(attrs={'class': 'form-control col-md-4'}),
+            # 'delivery_system': forms.Select(attrs={'class': 'form-control col-md-6'}),
+            # 'deli_payment':forms.BooleanField(),
+
+            # 'id':forms.Textarea
+
+        }
+
+
+
 
 class AdminProductEditForm(forms.ModelForm):
     class Meta:

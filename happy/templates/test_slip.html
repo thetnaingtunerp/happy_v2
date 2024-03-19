@@ -1,3 +1,6 @@
+
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -98,12 +101,11 @@ img {
     </head>
     <body>
         <div class="ticket">
+            
            
 
-            <p class="centered headtitle">Hapy
-                <br>09-941844742
-                <br>No.8,Maha_Bawga_Street, Kamayaut, Yangon</p>
-            <hr>
+            
+            <img src="{% static 'src/images/inv.svg' %}" alt="inv_img" >
             Invoice- {{ord_obj.id}}
             <br>
             Date -{{ord_obj.created_at}}

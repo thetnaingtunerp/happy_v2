@@ -7,9 +7,11 @@ urlpatterns = [
     path('', DashboardView.as_view(), name='DashboardView'),
     path('login/', UserLoginView.as_view(), name = 'UserLoginView'),
     path('logout/', UserLogoutView.as_view(), name='UserLogoutView'),
+    
     #setup
     path('DashSetupView/', DashSetupView.as_view(), name='DashSetupView'),
     path('CreateMember/', CreateMember.as_view(), name='CreateMember'),
+    path('CreateSupplier/', CreateSupplier.as_view(), name='CreateSupplier'),
     path('CategoryCreate',CategoryCreate.as_view(), name='CategoryCreate'),
     path('ProductCreate/', ProductCreate.as_view(), name='ProductCreate'),
     path('UnpackageView/', UnpackageView.as_view(), name='UnpackageView'),
@@ -30,5 +32,9 @@ urlpatterns = [
 
     #report
     path('SaleReportView/', SaleReportView.as_view(), name='SaleReportView'),
+
+    #purchase
+    path('PurchaseView/', PurchaseView.as_view(), name='PurchaseView'),
+    path('PurchaseCart/', PurchaseCart.as_view(), name='PurchaseCart'),
 
 ]

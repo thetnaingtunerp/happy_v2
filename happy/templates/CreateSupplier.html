@@ -14,7 +14,7 @@
 									data-target="#Medium-modal"
 									type="button"
 								>
-									+ Add Member
+									+ Add Supplier
 								</a>
 								<div
 									class="modal fade"
@@ -25,11 +25,11 @@
 									aria-hidden="true"
 								>
 									<div class="modal-dialog modal-dialog-centered">
-                                        <form action="{% url 'myapp:CreateMember' %}" method="post">{% csrf_token %}
+                                        <form action="{% url 'myapp:CreateSupplier' %}" method="post">{% csrf_token %}
 										<div class="modal-content">
 											<div class="modal-header">
 												<h4 class="modal-title" id="myLargeModalLabel">
-													Create Member
+													Create Supplier
 												</h4>
 												<button
 													type="button"

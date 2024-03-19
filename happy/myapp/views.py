@@ -95,6 +95,20 @@ class CreateMember(UserRequiredMixin, View):
             fm.save()
         return redirect(request.META['HTTP_REFERER'])
 
+
+class CreateSupplier(UserRequiredMixin, View):
+    def get(self, request):
+        fm = SupplierForm()
+        m = Supplier.objects.all()
+        return render(request, 'CreateSupplier.html', {'m':m, 'form':fm})
+
+    def post(self, request):
+        fm = SupplierForm(request.POST)
+        if fm.is_valid():
+            fm.save()
+        return redirect(request.META['HTTP_REFERER'])
+
+
 class UnitCreateView(View):
     def post(self, request):
         iunit = request.POST.get('iunit')
@@ -434,3 +448,122 @@ class PurchaseView(UserRequiredMixin,TemplateView):
         context['product_list'] = Item.objects.all().order_by('-id')
         # context['queryset'] = Order.objects.filter(created_at=datetime.date.today()).order_by('-id')
         return context
+
+
+
+class PurchaseCart(UserRequiredMixin, View):
+    def post(self, request):
+        pid = request.POST.get('pid')
+        qty = request.POST.get('quantity')
+
+        itm_obj = Item.objects.get(id=pid)
+        itm_id = itm_obj.id
+        stock = itm_obj.stockbalance
+        print(stock)
+        cart_pur = self.request.session.get("cart_pur", None)
+        if cart_pur:
+            cart_obj = pCart.objects.get(id=cart_pur)
+            this_product_in_pcart = cart_obj.pcartproduct_set.filter(product=itm_obj)
+            # Product already exists in cart
+            if this_product_in_pcart.exists():
+                cartproduct = this_product_in_pcart.last()
+                cp_subtotal = int(itm_obj.saleprice) * int(qty)
+                cp_stockbalance = int(stock) + int(qty)
+                cartproduct.quantity += int(qty)
+                cartproduct.subtotal += cp_subtotal
+                cartproduct.stockbalance = cp_stockbalance
+                cartproduct.save()
+                # item table stock balanc update
+                itm_update = Item.objects.filter(id=pid).update(stockbalance=cp_stockbalance)
+
+                cart_obj.total += cp_subtotal
+                cart_obj.save()
+                return redirect(request.META['HTTP_REFERER'])
+
+            else:
+                #new item add to cart
+                # item_filter = Item.objects.filter(id=pid)
+                cp_stockbalance = int(stock) + int(qty)
+                cp_subtotal = int(itm_obj.saleprice) * int(qty)
+                cartproduct = pCartProduct.objects.create(cart=cart_obj, product=itm_obj,
+                                                         rate=itm_obj.saleprice,
+                                                         quantity=qty, subtotal=cp_subtotal,
+                                                         stockbalance=cp_stockbalance)
+                # item table stock balanc update
+                itm_update = Item.objects.filter(id=pid).update(stockbalance=cp_stockbalance)
+                # Update Cart Total
+                cart_obj.total += cp_subtotal
+                cart_obj.save()
+                return redirect(request.META['HTTP_REFERER'])
+
+        else:
+            cart_obj = pCart.objects.create(total=0, staff=request.user)
+            self.request.session['cart_pur'] = cart_obj.id
+            # item_filter = Item.objects.filter(id=itm_obj)
+            cp_stockbalance = int(stock) + int(qty)
+            cp_subtotal = int(itm_obj.saleprice) * int(qty)
+            cartproduct = pCartProduct.objects.create(cart=cart_obj, product=itm_obj,
+                                                     rate=itm_obj.saleprice,
+                                                     quantity=qty, subtotal=cp_subtotal,
+                                                     stockbalance=cp_stockbalance)
+            #item table stock balanc update
+            itm_update = Item.objects.filter(id=pid).update(stockbalance=cp_stockbalance)
+
+            #Update Cart Total
+            cart_obj.total += cp_subtotal
+            cart_obj.save()
+            return redirect(request.META['HTTP_REFERER'])
+
+
+
+class PurchaseCheckoutView(UserRequiredMixin,CreateView):
+    template_name = 'checkout.html'
+    form_class = CheckoutForm
+    success_url = reverse_lazy('myapp:MyCartView')
+
+    # def dispatch(self, request, *args, **kwargs):
+    #     if request.user.is_authenticated and request.user.customer:
+    #         print('login....')
+    #     else:
+    #         return redirect('/login/?next=/checkout/')
+    #     return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart_id = self.request.session.get("cart_id", None)
+        if cart_id:
+            cart_obj = Cart.objects.get(id=cart_id)
+        else:
+            cart_obj = None
+        context['cart'] = cart_obj
+        return context
+
+    def form_valid(self, form):
+        cart_id = self.request.session.get('cart_id')
+        # print(form.instance.delivery_fee)
+        # deli = form.instance.delivery_fee
+        dis = form.instance.discount
+        if cart_id:
+            cart_obj = Cart.objects.get(id=cart_id)
+            form.instance.cart = cart_obj
+            form.instance.subtotal = cart_obj.total
+            # form.instance.discount = 0
+            form.instance.total = cart_obj.total
+
+            # form.instance.ordered_staus = 'Cash'
+            # form.instance.tax = cart_obj.tax
+            # form.instance.all_total = cart_obj.super_total
+            # total_deli = deli + cart_obj.super_total - dis
+            # form.instance.all_total_delivery = total_deli
+
+            del self.request.session['cart_id']
+        else:
+            return redirect('myapp:MyCartView')
+        return super().form_valid(form)
+
+
+
+
+
+
+

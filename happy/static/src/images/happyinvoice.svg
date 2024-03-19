@@ -1,0 +1,37 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2480 776" width="2480" height="776">
+	<title>New Project</title>
+	<defs>
+		<image  width="2480" height="3508" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACbAAAA20AQMAAAAUcmtOAAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAABDhJREFUeJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/g2mnAAB3R493AAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		tspan { white-space:pre } 
+		.t0 { font-size: 300px;fill: #0b0b0b;font-weight: 400;font-family: "Shrikhand-Regular", "Shrikhand" } 
+		.t1 { font-size: 100px;fill: #0b0b0b;font-weight: 400;font-family: "Shrikhand-Regular", "Shrikhand" } 
+		.t2 { font-size: 80px;fill: #0b0b0b;font-weight: 400;font-family: "Shrikhand-Regular", "Shrikhand" } 
+		.t3 { font-size: 55px;fill: #0b0b0b;font-weight: 400;font-family: "Shrikhand-Regular", "Shrikhand" } 
+		.s4 { fill: #000000 } 
+	</style>
+	<use id="Layer 1" href="#img1" x="0" y="0"/>
+	<text id="HAPPY " style="transform: matrix(1,0,0,1,115,339)" >
+		<tspan x="0" y="0" class="t0">H</tspan><tspan  y="0" class="t0">A</tspan><tspan  y="0" class="t0">P</tspan><tspan  y="0" class="t0">P</tspan><tspan  y="0" class="t0">Y</tspan><tspan  y="0" class="t0">
+</tspan>
+	</text>
+	<text id="INVOICE" style="transform: matrix(1,0,0,1,1020,711)" >
+		<tspan x="0" y="0" class="t1">I</tspan><tspan  y="0" class="t1">N</tspan><tspan  y="0" class="t1">V</tspan><tspan  y="0" class="t1">O</tspan><tspan  y="0" class="t1">I</tspan><tspan  y="0" class="t1">C</tspan><tspan  y="0" class="t1">E
+</tspan>
+	</text>
+	<text id="AIRCON &amp; SPAREPART  											S" style="transform: matrix(1,0,0,1,1246,255)" >
+		<tspan x="0" y="0" class="t2">A</tspan><tspan  y="0" class="t2">I</tspan><tspan  y="0" class="t2">R</tspan><tspan  y="0" class="t2">C</tspan><tspan  y="0" class="t2">O</tspan><tspan  y="0" class="t2">N</tspan><tspan  y="0" class="t2"> </tspan><tspan  y="0" class="t2">&amp;</tspan><tspan  y="0" class="t2"> </tspan><tspan  y="0" class="t2">S</tspan><tspan  y="0" class="t2">P</tspan><tspan  y="0" class="t2">A</tspan><tspan  y="0" class="t2">R</tspan><tspan  y="0" class="t2">E</tspan><tspan  y="0" class="t2">P</tspan><tspan  y="0" class="t2">A</tspan><tspan  y="0" class="t2">R</tspan><tspan  y="0" class="t2">T</tspan><tspan  y="0" class="t2"> </tspan><tspan  y="0" class="t2">
+</tspan>
+		<tspan x="0" y="96" class="t2">	</tspan><tspan  y="96" class="t2">	</tspan><tspan  y="96" class="t2">	</tspan><tspan  y="96" class="t2">	</tspan><tspan  y="96" class="t2">	</tspan><tspan  y="96" class="t2">	</tspan><tspan  y="96" class="t2">	</tspan><tspan  y="96" class="t2">	</tspan><tspan  y="96" class="t2">	</tspan><tspan  y="96" class="t2">	</tspan><tspan  y="96" class="t2">	</tspan><tspan  y="96" class="t2">S</tspan><tspan  y="96" class="t2">A</tspan><tspan  y="96" class="t2">L</tspan><tspan  y="96" class="t2">E</tspan><tspan  y="96" class="t2"> </tspan><tspan  y="96" class="t2">A</tspan><tspan  y="96" class="t2">N</tspan><tspan  y="96" class="t2">D</tspan><tspan  y="96" class="t2"> </tspan><tspan  y="96" class="t2">S</tspan><tspan  y="96" class="t2">E</tspan><tspan  y="96" class="t2">R</tspan><tspan  y="96" class="t2">V</tspan><tspan  y="96" class="t2">I</tspan><tspan  y="96" class="t2">C</tspan><tspan  y="96" class="t2">E</tspan><tspan  y="96" class="t2">
+</tspan>
+	</text>
+	<text id="NO 348-349 , Baho Middle Road , " style="transform: matrix(1,0,0,1,1243,452)" >
+		<tspan x="-905.7" y="0" class="t3">NO 348-349 , Baho Middle Road , Near Thamine Train Station ,</tspan><tspan  y="0" class="t3">
+</tspan>
+		<tspan x="-429.7" y="66" class="t3"> Mayangone Ward 2 , Yangon </tspan><tspan  y="66" class="t3">
+</tspan>
+	</text>
+	<path id="Shape 1" class="s4" d="m0 394.1v-5h2480v5z"/>
+	<path id="Shape 2" class="s4" d="m0 562.1v-5h2480v5z"/>
+</svg>

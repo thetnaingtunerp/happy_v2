@@ -8,7 +8,7 @@
 <div class="col-md-7">
     <div class="card-box mb-30">
         <div class="pd-20">
-            <h4 class="text-blue h4">Items in Shop</h4>
+            <h4 class="text-blue h4">Items</h4>
         </div>
         <div class="pb-20">
             <div class="pb-20">
@@ -50,7 +50,7 @@
         
                                     <a
                                         href="#"
-                                        class="btn btn-sm btn-success"
+                                        class="btn btn-sm btn-primary"
                                         data-toggle="modal"
                                         data-target="#Medium-modal-{{p.id}}"
                                         type="button"
@@ -80,7 +80,7 @@
                                                         ×
                                                     </button>
                                                 </div>
-                                                <form action="{% url 'myapp:AddtoCart' %}" method="post">
+                                                <form action="{% url 'myapp:PurchaseCart' %}" method="post">
                                                     {% csrf_token %}
                                                 <div class="modal-body">
                                                     <input type="text" value="{{p.id}}" name="pid" hidden>
@@ -94,7 +94,7 @@
                                                     >
                                                         Close
                                                     </button>
-                                                    <button type="submit" class="btn btn-success">
+                                                    <button type="submit" class="btn btn-primary">
                                                         Add to Cart
                                                     </button>
                                                 </div>
@@ -138,13 +138,13 @@
                     <th  class="text-right">Quantity</th>
                     
                     <th>Subtotal</th>
-                    {% if cart.cartproduct_set.all %}
+                    {% if pcart.pcartproduct_set.all %}
                     <th>Edit</th>
                     {% endif %}
                 </tr>
                 </thead>
                 <tbody>
-                {% for p in cart.cartproduct_set.all %}
+                {% for p in pcart.pcartproduct_set.all %}
                 <tr>
                     <td>{{forloop.counter}}</td>
                     <td>
@@ -169,13 +169,13 @@
     
                 <tr>
                     <td colspan="4" class="text-right">Total :</td>
-                    <td>{{cart.total}}</td>
+                    <td>{{pcart.total}}</td>
                     
     
                 </tr>
                 <tr>
-                    {% if cart.cartproduct_set.all %}
-                    <td colspan="6"><a href="{% url 'myapp:CheckoutView' %}" class="btn btn-primary btn-block">Check Out Detail</a>
+                    {% if pcart.pcartproduct_set.all %}
+                    <td colspan="6"><a href="{% url 'myapp:CheckoutView' %}" class="btn btn-primary btn-block">Create Purchase Form</a>
                     </td>
                     {% endif %}
                 </tr>

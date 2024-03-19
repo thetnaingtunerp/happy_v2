@@ -150,7 +150,7 @@
 						<div class="pd-20 card-box height-100-p">
 							<h5 class="h4">Purchase </h5>
 							<a
-								href="{% url 'myapp:MyCartView' %}"
+								href="{% url 'myapp:PurchaseView' %}"
 								class="btn-block"
 								data-toggle="#"
 								data-target="#"
@@ -191,6 +191,23 @@
 								type="button"
 							>
 								<img src="{% static 'vendors/images/c2.png' %}" alt="modal" />
+							</a>
+							
+						</div>
+					</div>
+
+					<!-- supplier -->
+					<div class="col-md-4 col-sm-12 mb-30">
+						<div class="pd-20 card-box height-100-p">
+							<h5 class="h4">Supplier</h5>
+							<a
+								href="{% url 'myapp:CreateSupplier' %}"
+								class="btn-block"
+								data-toggle="#"
+								data-target="#"
+								type="button"
+							>
+								<img src="{% static 'vendors/images/supplier.png' %}" alt="modal" />
 							</a>
 							
 						</div>
