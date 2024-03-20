@@ -24,7 +24,7 @@
             </tr>
             </thead>
             <tbody>
-                {% for p in ord_obj.cart.cartproduct_set.all %}
+                {% for p in ord_obj.cart.pcartproduct_set.all %}
             <tr>
                 <td>{{forloop.counter}}</td>
                 <td>
@@ -45,7 +45,7 @@
             <tr>
                 <td colspan="5" class="text-right">Amount :</td>
                 <td>{{ord_obj.total}}</td>
-                {% if cart.cartproduct_set.all %}
+                {% if pcart.pcartproduct_set.all %}
                 <td></td>
                 {% endif %}
 
@@ -53,8 +53,8 @@
 
             <tr>
                 <td colspan="5" class="text-right">Total :</td>
-                <td>{{cart.total}}</td>
-                {% if cart.cartproduct_set.all %}
+                <td>{{pcart.total}}</td>
+                {% if pcart.pcartproduct_set.all %}
                 <td><a href="{% url 'myapp:CheckoutView' %}" class="btn btn-sm btn-primary">Check Out Detail</a>
                 </td>
                 {% endif %}

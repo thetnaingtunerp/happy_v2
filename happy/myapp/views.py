@@ -349,10 +349,10 @@ class UnpackageView(View):
         i = request.POST.get('pid')
         getitm = Item.objects.get(id=i)
         sup = getitm.superitem
-        getitm.stockbalance += getitm.unpackqty
+        getitm.stockbalance -= 1
         getitm.save()
         supitm = Item.objects.get(id=sup)
-        supitm.stockbalance -=1
+        supitm.stockbalance += getitm.unpackqty
         supitm.save()
         return redirect('myapp:MyCartView')
 
@@ -430,7 +430,23 @@ class SaleReportView(UserRequiredMixin, ListView):
         qs = qs.order_by("-id") 
         return qs
 
+class SaleInvoiceReportView(View):
+    def get(self, request):
+        ord = Order.objects.all()
+        context ={'ord':ord}
+        return render(request, 'SaleInvoiceReportView.html', context)
 
+class ReportHome(TemplateView):
+    template_name = 'ReportHome.html'
+
+class PurchaseReportView(UserRequiredMixin, ListView):
+    template_name = 'PurchaseReportView.html'
+    model = pOrder
+
+    def get_queryset(self, *args, **kwargs): 
+        qs = super(PurchaseReportView, self).get_queryset(*args, **kwargs) 
+        qs = qs.order_by("-id") 
+        return qs
 
 
 ################################# Purchase #######################################
@@ -563,7 +579,16 @@ class PurchaseCheckoutView(UserRequiredMixin,CreateView):
         return super().form_valid(form)
 
 
+class PurchaseInvoiceDetailView(UserRequiredMixin,DetailView):
+    template_name = 'PurchaseInvoiceDetailView.html'
+    model = pOrder
+    context_object_name = 'ord_obj'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context['allstatus'] = STATUS
+
+        return context
 
 
 

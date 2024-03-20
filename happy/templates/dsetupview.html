@@ -165,7 +165,7 @@
             </div>
             <div class="row">
                 <div class="form-group row col-md-6">
-                    <label class="col-sm-12 col-md-12 col-form-label">Super Item</label>
+                    <label class="col-sm-12 col-md-12 col-form-label">Sub Item</label>
                     <div class="col-sm-12 col-md-10">
                         <select
                         class="custom-select2 form-control"
@@ -251,6 +251,11 @@
                 <td>{{p.stockbalance}}</td>
                 <td>
                     <a href="{% url 'myapp:ProductEditView' p.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                    {% if p.unpackqty == 1 %}
+
+                    {% else %}
+                    <a href="{% url 'myapp:ProductDeleteView' p.id %}" class="btn btn-sm btn-warning">Unpack</a>
+                    {% endif %}
                     <a href="{% url 'myapp:ProductDeleteView' p.id %}" class="btn btn-sm btn-outline-danger">Remove</a>
                 </td>
                 

@@ -16,7 +16,7 @@
             <tr class="">
                 <th class="table-plus datatable-nosort">InvoiceNo</th>
                 <th>Amount</th>
-                <th>Member</th>
+                <th>Supplier</th>
                 <th>Date</th>
                 <th>Payment</th>
 				<th>Details</th>
@@ -28,8 +28,8 @@
                 <td class="table-plus"> <a href="#">{{p.id}}</a></td>
                 <td><a href="#"><strong>{{p.total}}</strong></a></td>
                
-                {% if p.member %}
-                <td>{{p.member}}</td>
+                {% if p.supplier %}
+                <td>{{p.supplier}}</td>
                 {% else %}
                 <td>-</td>
                 {% endif %}
@@ -37,7 +37,7 @@
                 <td>
                     {{p.payment}}
                     </td>
-					<td><a href="{% url 'myapp:InvoiceDetailView' p.id %}" class="btn btn-sm btn-outline-info">details</a></td>
+					<td><a href="{% url 'myapp:PurchaseInvoiceDetailView' p.id %}" class="btn btn-sm btn-outline-primary">details</a></td>
 
             </tr>
             {% endfor %}

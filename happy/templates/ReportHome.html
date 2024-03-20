@@ -1,0 +1,86 @@
+{% extends 'dbase.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="row clearfix">
+
+{% comment %} sale amount report  {% endcomment %}
+<div class="col-md-4 col-sm-12 mb-30">
+    <div class="pd-20 card-box height-100-p">
+        <h5 class="h4">Sale Amount Reports</h5>
+        <a
+            href="{% url 'myapp:SaleReportView' %}"
+            class="btn-block"
+            data-toggle="#"
+            data-target="#"
+            type="button"
+        >
+            <img src="{% static 'vendors/images/salereport.jpg' %}" alt="modal" />
+        </a>
+        
+    </div>
+</div>
+
+
+
+{% comment %} sale amount report  {% endcomment %}
+<div class="col-md-4 col-sm-12 mb-30">
+    <div class="pd-20 card-box height-100-p">
+        <h5 class="h4">Sale Invoice Reports</h5>
+        <a
+            href="{% url 'myapp:SaleInvoiceReportView' %}"
+            class="btn-block"
+            data-toggle="#"
+            data-target="#"
+            type="button"
+        >
+            <img src="{% static 'vendors/images/salereport.jpg' %}" alt="modal" />
+        </a>
+        
+    </div>
+</div>
+
+
+
+{% comment %} Purchase report  {% endcomment %}
+<div class="col-md-4 col-sm-12 mb-30">
+    <div class="pd-20 card-box height-100-p">
+        <h5 class="h4">PUrchase Amount Reports</h5>
+        <a
+            href="{% url 'myapp:SaleReportView' %}"
+            class="btn-block"
+            data-toggle="#"
+            data-target="#"
+            type="button"
+        >
+            <img src="{% static 'vendors/images/salereport.jpg' %}" alt="modal" />
+        </a>
+        
+    </div>
+</div>
+
+
+
+
+{% comment %} Purchase Invoice report  {% endcomment %}
+<div class="col-md-4 col-sm-12 mb-30">
+    <div class="pd-20 card-box height-100-p">
+        <h5 class="h4">Purchase Invoice Reports</h5>
+        <a
+            href="{% url 'myapp:SaleReportView' %}"
+            class="btn-block"
+            data-toggle="#"
+            data-target="#"
+            type="button"
+        >
+            <img src="{% static 'vendors/images/salereport.jpg' %}" alt="modal" />
+        </a>
+        
+    </div>
+</div>
+
+</div>
+
+{% endblock content %}

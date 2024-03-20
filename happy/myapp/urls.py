@@ -32,10 +32,14 @@ urlpatterns = [
 
     #report
     path('SaleReportView/', SaleReportView.as_view(), name='SaleReportView'),
+    path('SaleInvoiceReportView/', SaleInvoiceReportView.as_view(), name='SaleInvoiceReportView'),
+    path('ReportHome/', ReportHome.as_view(), name='ReportHome'),
+    path('PurchaseReportView/', PurchaseReportView.as_view(), name='PurchaseReportView'),
 
     #purchase
     path('PurchaseView/', PurchaseView.as_view(), name='PurchaseView'),
     path('PurchaseCart/', PurchaseCart.as_view(), name='PurchaseCart'),
     path('PurchaseCheckoutView/', PurchaseCheckoutView.as_view(), name='PurchaseCheckoutView'),
+    path('PurchaseInvoiceDetailView/<int:pk>/', PurchaseInvoiceDetailView.as_view(), name='PurchaseInvoiceDetailView'),
 
 ]
