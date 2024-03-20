@@ -446,7 +446,7 @@ class PurchaseView(UserRequiredMixin,TemplateView):
         
         context['pcart'] = pcart
         context['product_list'] = Item.objects.all().order_by('-id')
-        # context['queryset'] = Order.objects.filter(created_at=datetime.date.today()).order_by('-id')
+        context['queryset'] = pOrder.objects.filter(created_at=datetime.date.today()).order_by('-id')
         return context
 
 
@@ -454,6 +454,7 @@ class PurchaseView(UserRequiredMixin,TemplateView):
 class PurchaseCart(UserRequiredMixin, View):
     def post(self, request):
         pid = request.POST.get('pid')
+        pprice = request.POST.get('price')
         qty = request.POST.get('quantity')
 
         itm_obj = Item.objects.get(id=pid)
@@ -474,7 +475,7 @@ class PurchaseCart(UserRequiredMixin, View):
                 cartproduct.stockbalance = cp_stockbalance
                 cartproduct.save()
                 # item table stock balanc update
-                itm_update = Item.objects.filter(id=pid).update(stockbalance=cp_stockbalance)
+                itm_update = Item.objects.filter(id=pid).update(stockbalance=cp_stockbalance,purchaseprice=pprice )
 
                 cart_obj.total += cp_subtotal
                 cart_obj.save()
@@ -490,7 +491,7 @@ class PurchaseCart(UserRequiredMixin, View):
                                                          quantity=qty, subtotal=cp_subtotal,
                                                          stockbalance=cp_stockbalance)
                 # item table stock balanc update
-                itm_update = Item.objects.filter(id=pid).update(stockbalance=cp_stockbalance)
+                itm_update = Item.objects.filter(id=pid).update(stockbalance=cp_stockbalance, purchaseprice=pprice)
                 # Update Cart Total
                 cart_obj.total += cp_subtotal
                 cart_obj.save()
@@ -507,7 +508,7 @@ class PurchaseCart(UserRequiredMixin, View):
                                                      quantity=qty, subtotal=cp_subtotal,
                                                      stockbalance=cp_stockbalance)
             #item table stock balanc update
-            itm_update = Item.objects.filter(id=pid).update(stockbalance=cp_stockbalance)
+            itm_update = Item.objects.filter(id=pid).update(stockbalance=cp_stockbalance, purchaseprice=pprice)
 
             #Update Cart Total
             cart_obj.total += cp_subtotal
@@ -517,9 +518,9 @@ class PurchaseCart(UserRequiredMixin, View):
 
 
 class PurchaseCheckoutView(UserRequiredMixin,CreateView):
-    template_name = 'checkout.html'
-    form_class = CheckoutForm
-    success_url = reverse_lazy('myapp:MyCartView')
+    template_name = 'pcheckout.html'
+    form_class = PurchaseCheckoutForm
+    success_url = reverse_lazy('myapp:PurchaseView')
 
     # def dispatch(self, request, *args, **kwargs):
     #     if request.user.is_authenticated and request.user.customer:
@@ -530,21 +531,21 @@ class PurchaseCheckoutView(UserRequiredMixin,CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        cart_id = self.request.session.get("cart_id", None)
-        if cart_id:
-            cart_obj = Cart.objects.get(id=cart_id)
+        cart_pur = self.request.session.get("cart_pur", None)
+        if cart_pur:
+            cart_obj = pCart.objects.get(id=cart_pur)
         else:
             cart_obj = None
-        context['cart'] = cart_obj
+        context['pcart'] = cart_obj
         return context
 
     def form_valid(self, form):
-        cart_id = self.request.session.get('cart_id')
+        cart_pur = self.request.session.get('cart_pur')
         # print(form.instance.delivery_fee)
         # deli = form.instance.delivery_fee
         dis = form.instance.discount
-        if cart_id:
-            cart_obj = Cart.objects.get(id=cart_id)
+        if cart_pur:
+            cart_obj = pCart.objects.get(id=cart_pur)
             form.instance.cart = cart_obj
             form.instance.subtotal = cart_obj.total
             # form.instance.discount = 0
@@ -556,9 +557,9 @@ class PurchaseCheckoutView(UserRequiredMixin,CreateView):
             # total_deli = deli + cart_obj.super_total - dis
             # form.instance.all_total_delivery = total_deli
 
-            del self.request.session['cart_id']
+            del self.request.session['cart_pur']
         else:
-            return redirect('myapp:MyCartView')
+            return redirect('myapp:PurchaseView')
         return super().form_valid(form)
 
 

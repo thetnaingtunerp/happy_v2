@@ -84,7 +84,11 @@
                                                     {% csrf_token %}
                                                 <div class="modal-body">
                                                     <input type="text" value="{{p.id}}" name="pid" hidden>
-                                                    <input type="number" name="quantity" class="form-control" value="1">
+                                                    <label for="">Enter Purchase Price</label>
+                                                    <input type="number" name="price" class="form-control" value="" placeholder="Purchase Price">
+                                                    <br>
+                                                    <label for="">Enter Purchase Quantity</label>
+                                                    <input type="number" name="quantity" class="form-control" value="" placeholder="Quantity">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button
@@ -175,7 +179,7 @@
                 </tr>
                 <tr>
                     {% if pcart.pcartproduct_set.all %}
-                    <td colspan="6"><a href="{% url 'myapp:CheckoutView' %}" class="btn btn-primary btn-block">Create Purchase Form</a>
+                    <td colspan="6"><a href="{% url 'myapp:PurchaseCheckoutView' %}" class="btn btn-primary btn-block">Create Purchase Form</a>
                     </td>
                     {% endif %}
                 </tr>

@@ -36,5 +36,6 @@ urlpatterns = [
     #purchase
     path('PurchaseView/', PurchaseView.as_view(), name='PurchaseView'),
     path('PurchaseCart/', PurchaseCart.as_view(), name='PurchaseCart'),
+    path('PurchaseCheckoutView/', PurchaseCheckoutView.as_view(), name='PurchaseCheckoutView'),
 
 ]
