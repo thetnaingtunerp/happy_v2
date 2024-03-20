@@ -1,0 +1,68 @@
+{% extends 'dbase.html' %}
+
+{% block content %}
+
+
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <form action="" method="post">{% csrf_token %}
+        {{form}}
+        <input type="submit" value="Save" class="btn btn-success">
+    </form>
+    </div>
+</div>
+
+
+
+<!--=============================================================-->
+<div class="card-box mb-30">
+    <div class="pd-20">
+
+        
+
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-warning">
+
+                <th>No</th>
+                <th>Name</th>
+                <th>PurchasePrice</th>
+                <th>SalePrice</th>
+                <th>Unit/Type</th>
+                <th>Unpack Qty</th>
+                <th>BalanceQTY</th>
+                <th>
+                   Edit
+                </th>
+                
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in object_list %}
+            <tr>
+                <td class="table-plus"><a href="#"><b>{{p.id}}</b></a></td>
+                <td>{{p.employee_name}}| ({{p.gender}})</td>
+                <td>{{p.nrc_no}}</td>
+                <td>{{p.fathername}}</td>
+                <td>{{p.mothername}}</td>
+                <td>{{p.phone}}</td>
+                <td>{{p.address}}</td>
+                <td>
+                   
+                </td>
+                
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock content %}
