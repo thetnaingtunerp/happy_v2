@@ -19,8 +19,11 @@ class employee_profile(models.Model):
     dob = models.DateField()
     marital = models.CharField(max_length=225, blank=True, null=True)
     entrydate = models.DateField()
+    salary = models.PositiveIntegerField(default=0)
+    daily_rate = models.PositiveIntegerField(default=0)
     photo = models.ImageField(upload_to='', blank=True, null=True)
     familytable = models.ImageField(upload_to='', blank=True, null=True)
+    active = models.BooleanField(default=True)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

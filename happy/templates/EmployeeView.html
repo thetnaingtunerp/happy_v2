@@ -1,16 +1,31 @@
 {% extends 'dbase.html' %}
 
 {% block content %}
-
-
-<div class="card-box mb-30">
-    <div class="pd-20">
-        <form action="" method="post">{% csrf_token %}
+<div class="row">
+<div class="col-md-3"></div>
+<div class="card-box col-md-6 pd-20 mb-30">
+    <label for="" ><h4 class="text-blue">Employee Info</h4></label>
+    <form action="" method="post" >{% csrf_token %}
+            
         {{form}}
+    
+        <input type="submit" value="Save" class="btn btn-success btn-block">
+    </form>
+</div>
+<div class="col-md-3"></div>
+</div>
+<!-- <div class="card-box mb-30">
+    <div class="pd-20">
+        
+    <form action="" method="post" >{% csrf_token %}
+            
+        {{form}}
+    
         <input type="submit" value="Save" class="btn btn-success">
     </form>
+
     </div>
-</div>
+</div> -->
 
 
 
@@ -51,7 +66,7 @@
                 <td>{{p.phone}}</td>
                 <td>{{p.address}}</td>
                 <td>
-                   
+                   <a href="{% url 'employee:EmpEditView' p.id %}" class="btn btn-sm btn-info"><i class="icon-copy dw dw-edit-1"></i></a>
                 </td>
                 
 

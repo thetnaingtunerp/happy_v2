@@ -29,4 +29,23 @@ class EmployeeView(View):
         if fm.is_valid():
             fm.save()
         return redirect(request.META['HTTP_REFERER'])
-   
+
+
+class EmpEditView(View):
+    def get(self,request, pk):
+        pi = employee_profile.objects.get(id=pk)
+        fm = EmployeeForm(instance=pi)
+        return render(request,'EmployeeView.html', {'form':fm})
+
+    def post(self, request, pk):
+        pi = employee_profile.objects.get(id=pk)
+        fm = EmployeeForm(request.POST,instance=pi)
+        if fm.is_valid():
+            fm.save()
+        return redirect('employee:EmployeeView')
+
+
+
+
+
+
