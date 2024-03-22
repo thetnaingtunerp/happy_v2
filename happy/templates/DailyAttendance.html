@@ -1,0 +1,87 @@
+{% extends 'dbase.html' %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-4">
+        
+        <div class="card-box mb-30 pd-20">
+            <label for="" class="pd-20"><h4 class=" text-blue">Daily Attendance</h4></label>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Att</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for e in ep %}
+                    <tr>
+                        <td>{{e.employee_name}}</td>
+                        <td>
+                            <form action="{% url 'employee:DailyAttendance' %}" method="post">{% csrf_token %}
+                                <input type="number" name="eid" value="{{e.id}}" hidden>
+                                <input type="submit" value="Check In" class="btn btn-sm btn-outline-success">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+
+
+    <div class="col-md-8">
+        <div class="card-box mb-30">
+            <label for="" class="pd-20"><h4 class=" text-blue">Daily Attendance</h4></label>
+                <table class="data-table table stripe hover nowrap">
+                    <thead>
+                    <tr class="table-warning">
+        
+                        <th>Name</th>
+                        <th>Entry Time</th>
+                        <th>Time Out</th>
+                        
+                        
+        
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for p in et %}
+                    <tr>
+                        <td class="table-plus"><a href="#"><b>{{p.employee}}</b></a></td>
+                        <td>{{p.entry_time}}</td>
+                        <td>
+                            <!-- {{p.checkout_time}} -->
+                            {% if p.checkout_time %}
+                            {{p.checkout_time}}
+                            {% else %}
+                            <form action="{% url 'employee:EmpCheckout' %}" method="post">{% csrf_token %}
+                                <input type="number" name="eid" value="{{p.id}}" hidden>
+                                <input type="submit" value="CheckOut" class="btn btn-sm btn-outline-warning">
+                            </form>
+                            {% endif %}
+                        </td>
+        
+                    </tr>
+                    {% endfor %}
+        
+                    </tbody>
+                </table>
+        </div>
+        
+    </div>
+</div>
+
+
+<!--=============================================================-->
+
+
+
+
+
+{% endblock content %}

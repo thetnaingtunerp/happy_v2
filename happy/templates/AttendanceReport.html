@@ -1,0 +1,135 @@
+{% extends 'dbase.html' %}
+
+{% block content %}
+
+<!-- 
+<div class="card-box mb-30 col-md-6">
+   <form action="/">
+        <div class="form-group row pd-10">
+            <label class="col-sm-12 col-md-4 col-form-label">FromDate</label>
+            <div class="col-sm-12 col-md-8">
+                <input class="form-control" type="date" placeholder="" name="sdate" required>
+            </div>
+        </div>
+        <div class="form-group row pd-10">
+            <label class="col-sm-12 col-md-4 col-form-label">To Date</label>
+            <div class="col-sm-12 col-md-8">
+                <input class="form-control" type="date" placeholder="" name="sdate" required>
+            </div>
+        </div>
+        <div class="form-group row pd-20">
+            <label class="col-sm-12 col-md-4 col-form-label"></label>
+            <input type="submit" value="Search" class="btn btn-block btn-outline-primary">
+        </div>
+    </form>
+    
+</div> -->
+
+
+
+
+<!--=============================================================-->
+<div class="card-box mb-30">
+    <div class="pd-20">
+
+        <a
+									href="#"
+									class="btn btn-outline-primary"
+									data-toggle="modal"
+									data-target="#Medium-modal"
+									type="button"
+								>
+									Filter By Date
+								</a>
+								<div
+									class="modal fade"
+									id="Medium-modal"
+									tabindex="-1"
+									role="dialog"
+									aria-labelledby="myLargeModalLabel"
+									aria-hidden="true"
+								>
+									<div class="modal-dialog modal-dialog-centered">
+                                        <!-- <form action="{% url 'myapp:CategoryCreate' %}" method="post">{% csrf_token %} -->
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myLargeModalLabel">
+													Filter By Date
+												</h4>
+												<button
+													type="button"
+													class="close"
+													data-dismiss="modal"
+													aria-hidden="true"
+												>
+													×
+												</button>
+											</div>
+
+											<div class="modal-body">
+                                                
+                                                <form action="{% url 'employee:AttendanceReport' %}" method="post">{% csrf_token %}
+                                                    <div class="form-group row pd-10">
+                                                        <label class="col-sm-12 col-md-4 col-form-label">FromDate</label>
+                                                        <div class="col-sm-12 col-md-8">
+                                                            <input class="form-control" type="date" placeholder="" name="sdate" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row pd-10">
+                                                        <label class="col-sm-12 col-md-4 col-form-label">To Date</label>
+                                                        <div class="col-sm-12 col-md-8">
+                                                            <input class="form-control" type="date" placeholder="" name="edate" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row pd-20">
+                                                        <label class="col-sm-12 col-md-4 col-form-label"></label>
+                                                        <input type="submit" value="Search" class="btn btn-block btn-outline-primary">
+                                                    </div>
+                                                </form>
+
+
+
+											</div>
+											<div class="modal-footer">
+												
+											</div>
+										</div>
+                                          
+									</div>
+								</div>
+
+                                <a href="{% url 'employee:DailyAttendance' %}" class="btn btn-info">DailyAttendance</a>
+                                <a href="{% url 'employee:EmployeeView' %}" class="btn btn-outline-success">Create New Employee</a>
+
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-warning">
+
+                <th>Name</th>
+                <th>Time In</th>
+                <th>Time Out</th>
+                
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in et %}
+            <tr>
+                <td class="table-plus"><a href="#"><b>{{p.employee}}</b></a></td>
+                <td>{{p.entry_time}}</td>
+                <td>{{p.checkout_time}}</td>
+                             
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock content %}

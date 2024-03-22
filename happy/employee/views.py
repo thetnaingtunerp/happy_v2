@@ -44,8 +44,41 @@ class EmpEditView(View):
             fm.save()
         return redirect('employee:EmployeeView')
 
+class DailyAttendance(View):
+    def get(self, request):
+        ep = employee_profile.objects.all()
+        et = employee_attendance.objects.filter(created_at=datetime.datetime.now())
+        context ={'ep':ep, 'et':et}
+        return render(request, 'DailyAttendance.html', context)
+    
+    def post(self, request):
+        ed = request.POST.get('eid')
+        today = datetime.datetime.now()
+        emp_obj = employee_profile.objects.get(id=ed)
+        ee = employee_attendance(employee=emp_obj, entry_time=today)
+        ee.save()
+        return redirect(request.META['HTTP_REFERER'])
+        
 
+class EmpCheckout(View):
+    def post(self, request):
+        ed = request.POST.get('eid')
+        today = datetime.datetime.now()
+        emp_obj = employee_profile.objects.get(id=ed)
+        et = employee_attendance.objects.filter(employee=emp_obj).update(checkout_time=today)
+        return redirect(request.META['HTTP_REFERER'])
 
-
-
+class AttendanceReport(View):
+    def get(self, request):
+        ep = employee_profile.objects.all()
+        et = employee_attendance.objects.all()
+        context ={'ep':ep, 'et':et}
+        return render(request, 'AttendanceReport.html', context)
+    
+    def post(self, request):
+        sd = request.POST.get('sdate')
+        ed = request.POST.get('edate')
+        et =employee_attendance.objects.filter(created_at__range=[sd, ed])
+        context ={'et':et}
+        return render(request, 'AttendanceReport.html', context)
 

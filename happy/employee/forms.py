@@ -22,3 +22,13 @@ class EmployeeForm(forms.ModelForm):
             'daily_rate': forms.NumberInput(attrs={'class': 'form-control'}),
             
         }
+
+
+
+
+class DateFilterForm(forms.Form):
+    start_date = forms.DateInput(attrs={"type": "date", 'class': 'form-control'}),
+    end_date = forms.DateInput(attrs={"type": "date", 'class': 'form-control'}),
+
+
+
