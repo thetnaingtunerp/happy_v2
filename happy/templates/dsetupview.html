@@ -223,7 +223,7 @@
     <div class="pb-20">
         <table class="data-table table stripe hover nowrap">
             <thead>
-            <tr class="table-warning">
+            <tr class="">
 
                 <th>Name</th>
                 <th>Category</th>
@@ -250,13 +250,17 @@
                 <td>{{p.unpackqty}}</td>
                 <td>{{p.stockbalance}}</td>
                 <td>
-                    <a href="{% url 'myapp:ProductEditView' p.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <a href="{% url 'myapp:ProductEditView' p.id %}" class="btn btn-sm btn-primary"><i class="icon-copy dw dw-edit-1"></i></a>
+                    <a href="{% url 'myapp:ProductDeleteView' p.id %}" class="btn btn-sm btn-danger"><i class="icon-copy dw dw-delete-3"></i></a>
+                   
                     {% if p.unpackqty == 1 %}
 
                     {% else %}
-                    <a href="{% url 'myapp:ProductDeleteView' p.id %}" class="btn btn-sm btn-warning">Unpack</a>
+                    
+                    <a href="{% url 'myapp:UnpackageView' p.id %}" class="btn btn-sm btn-warning"><span class="micon bi bi-gift-fill"></span></a>
+
                     {% endif %}
-                    <a href="{% url 'myapp:ProductDeleteView' p.id %}" class="btn btn-sm btn-outline-danger">Remove</a>
+                    
                 </td>
                 
 

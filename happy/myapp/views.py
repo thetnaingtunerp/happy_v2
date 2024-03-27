@@ -344,17 +344,19 @@ class CheckoutView(UserRequiredMixin,CreateView):
             return redirect('myapp:MyCartView')
         return super().form_valid(form)
 
-class UnpackageView(View):
-    def post(self,request):
-        i = request.POST.get('pid')
-        getitm = Item.objects.get(id=i)
+class UnpackageView(UserRequiredMixin,View):
+    def get(self, request, pk):
+        # i = request.GET.get('id')
+        getitm = Item.objects.get(id=pk)
+        print(getitm)
         sup = getitm.superitem
         getitm.stockbalance -= 1
         getitm.save()
         supitm = Item.objects.get(id=sup)
         supitm.stockbalance += getitm.unpackqty
         supitm.save()
-        return redirect('myapp:MyCartView')
+        return redirect(request.META['HTTP_REFERER'])
+
 
 
 class InvoicesView(UserRequiredMixin,TemplateView):
@@ -430,7 +432,7 @@ class SaleReportView(UserRequiredMixin, ListView):
         qs = qs.order_by("-id") 
         return qs
 
-class SaleInvoiceReportView(View):
+class SaleInvoiceReportView(UserRequiredMixin,View):
     def get(self, request):
         ord = Order.objects.all()
         context ={'ord':ord}
