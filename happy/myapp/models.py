@@ -25,6 +25,7 @@ class Unit(models.Model):
 
 class Item(models.Model):
     itemname = models.CharField(max_length=255,blank=True, null=True)
+    photo = models.ImageField(upload_to='', blank=True, null=True)
     category = models.CharField(max_length=225)
     iunit = models.CharField(max_length=255,blank=True, null=True)
     saleprice = models.PositiveIntegerField(default=0)

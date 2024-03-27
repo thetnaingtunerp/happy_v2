@@ -12,10 +12,10 @@
         </div>
         <div class="pb-20">
             <div class="pb-20">
-                <table class="data-table table stripe hover nowrap">
+                <table class="data-table table stripe hover">
                     <thead>
                     <tr class="">
-                        <th class="table-plus datatable-nosort">Item Name</th>
+                        <th class=" datatable-nosort">Item Name</th>
                        
                         <th>Category</th>
                         <th>Sale Price</th>
@@ -44,9 +44,7 @@
         
                         <td>
         
-                            {% if p.stockbalance <= 1 %}
-                                <a href="#" class="btn btn-sm btn-outline-danger" >out of stock</a>
-                            {% else %}
+                           
         
                                     <a
                                         href="#"
@@ -107,18 +105,10 @@
                                         </div>
                                     </div>
         
-                                    {% endif %}
+                                 
         
                         </td>
-                        <!-- <td>
-                            {% if p.superitem %}
-                            <form action="{% url 'myapp:UnpackageView' %}" method="post">{% csrf_token %}
-                                <input type="text" value="{{p.id}}" name="pid" hidden>
-                                <button type="submit" class="btn btn-sm btn-warning"><span class="micon bi bi-gift-fill"></span></button>
-                            </form>
-                            {% endif %}
-                        </td> -->
-        
+                       
                     </tr>
                     {% endfor %}
         

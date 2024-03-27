@@ -1,4 +1,4 @@
-{% extends 'dbase.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
@@ -66,7 +66,7 @@
                                 <!-- =================================== -->
                                 <a
                                 href="#"
-                                class="btn btn-sm btn-outline-success"
+                                class="btn btn-sm btn-outline-info"
                                 data-toggle="modal"
                                 data-target="#unit-modal"
                                 type="button"
@@ -122,10 +122,47 @@
                                         </form>
                                 </div>
                             </div>
-    </div>
-</div>
+                            <!-- ============================ -->
+                            <a
+                   href="#"
+                   class="btn btn-sm btn-outline-success"
+                   data-toggle="modal"
+                   data-target="#bd-example-modal-lg-{{p.id}}"
+                   type="button"
+               >
+               + Create Item
+                   <!-- <img src="vendors/images/modal-img1.jpg" alt="modal" /> -->
+               </a>
+               <div
+                   class="modal fade bs-example-modal-lg"
+                   id="bd-example-modal-lg-{{p.id}}"
+                   tabindex="-1"
+                   role="dialog"
+                   aria-labelledby="myLargeModalLabel"
+                   aria-hidden="true"
+               >
+                   <div class="modal-dialog modal-lg modal-dialog-centered">
+                       <div class="modal-content">
+                           <div class="modal-header">
+                               <h4 class="modal-title" id="myLargeModalLabel">
+                                   Create Item
+                               </h4>
+                               <button
+                                   type="button"
+                                   class="close"
+                                   data-dismiss="modal"
+                                   aria-hidden="true"
+                               >
+                                   ×
+                               </button>
+                           </div>
+                           <div class="modal-body">
+                               
 
-
+                               <div class="row">
+                                   
+                                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-30">
+                                      
 <div class="card-box mb-30">
     <div class="pd-20">
         <form action="{% url 'myapp:ProductCreate' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
@@ -137,9 +174,9 @@
                     </div>
                 </div>
                 <div class="form-group row col-md-6">
-                    <label class="col-sm-12 col-md-12 col-form-label">Purchase Price</label>
+                    <label class="col-sm-12 col-md-12 col-form-label">Photo</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" type="number" placeholder="" name="purchaseprice">
+                        <input class="form-control" type="file" placeholder="" name="photo">
                     </div>
                 </div>
             </div>
@@ -212,6 +249,35 @@
     </div>
 </div>
 
+                                   </div>
+                               </div>
+
+                               
+                           </div>
+                           <div class="modal-footer">
+                               <button
+                                   type="button"
+                                   class="btn btn-secondary"
+                                   data-dismiss="modal"
+                               >
+                                   Close
+                               </button>
+                               <button type="button" class="btn btn-primary">
+                                   Save changes
+                               </button>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+
+<!-- Large modal -->
+                            <!-- ================================== -->
+    </div>
+</div>
+
+
+
 
 <!--=============================================================-->
 <div class="card-box mb-30">
@@ -221,17 +287,17 @@
 
     </div>
     <div class="pb-20">
-        <table class="data-table table stripe hover nowrap">
+        <table class="data-table table stripe hover wrap">
             <thead>
             <tr class="">
 
-                <th>Name</th>
+                <th>Photo</th>
+                <th>ပစ္စည်းအမျိုးအမည်</th>
                 <th>Category</th>
-                <th>PurchasePrice</th>
-                <th>SalePrice</th>
-                <th>Unit/Type</th>
-                <th>Unpack Qty</th>
-                <th>BalanceQTY</th>
+               
+                <th>ရောင်းဈေး</th>
+                
+                <th>လက်ကျန်ပမာဏ</th>
                 <th>
                    Edit
                 </th>
@@ -242,13 +308,13 @@
             <tbody>
             {% for p in item_list %}
             <tr>
-                <td class="table-plus"><a href="#"><b>{{p.itemname}}</b></a></td>
+                <td><img src="{{p.photo.url}}" alt="photo" width="100px"></td>
+                <td><a href="#"><b>{{p.itemname}}</b></a></td>
                 <td>{{p.category}}</td>
-                <td>{{p.purchaseprice}}</td>
+                
                 <td>{{p.saleprice}}</td>
-                <td>{{p.iunit}}</td>
-                <td>{{p.unpackqty}}</td>
-                <td>{{p.stockbalance}}</td>
+                
+                <td>{{p.stockbalance}}(<span class="text-danger">{{p.iunit}}</span>)</td>
                 <td>
                     <a href="{% url 'myapp:ProductEditView' p.id %}" class="btn btn-sm btn-primary"><i class="icon-copy dw dw-edit-1"></i></a>
                     <a href="{% url 'myapp:ProductDeleteView' p.id %}" class="btn btn-sm btn-danger"><i class="icon-copy dw dw-delete-3"></i></a>

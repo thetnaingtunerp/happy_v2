@@ -127,7 +127,7 @@ class ProductCreate(UserRequiredMixin, View):
         itemname = request.POST.get('itemname')
         category = request.POST.get('category')
         iunit = request.POST.get('iunit')
-        purchaseprice = request.POST.get('purchaseprice')
+        photo = request.FILES['photo']
         saleprice = request.POST.get('saleprice')
         superitem = request.POST.get('superitem')
         unpackqty = request.POST.get('unpackqty')
@@ -136,7 +136,7 @@ class ProductCreate(UserRequiredMixin, View):
         if not itemname:
             message = 'please enter items'
         if not message:
-            item = Item(itemname=itemname,category=category, iunit=iunit, saleprice=saleprice,purchaseprice=purchaseprice,superitem=superitem,unpackqty=unpackqty)
+            item = Item(itemname=itemname, photo=photo,category=category, iunit=iunit, saleprice=saleprice,purchaseprice=0,superitem=superitem,unpackqty=unpackqty)
             item.save()
             return redirect(request.META['HTTP_REFERER'])
         else:
