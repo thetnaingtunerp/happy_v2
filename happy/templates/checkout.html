@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'dbase.html' %}
 {% load static %}
 
 {% block content %}
@@ -10,7 +10,7 @@
         <div class="card mb-4">
             <div class="card-header">
 
-                <a href="#"><h5>Customer Detail</h5></a>
+                <a href="{% url 'myapp:CreateMember' %}" class="btn btn-md btn-success">Create New Customer</a>
             </div>
             <div class="card-body">
                 <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}

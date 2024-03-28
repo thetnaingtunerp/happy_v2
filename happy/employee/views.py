@@ -17,7 +17,17 @@ from django.forms import modelformset_factory
 from django.urls import reverse
 
 
-class EmployeeView(View):
+class UserRequiredMixin(object):
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated & request.user.is_superuser:
+            pass
+        else:
+            return redirect('myapp:UserLoginView')
+        return super().dispatch(request, *args, **kwargs)
+
+
+
+class EmployeeView(UserRequiredMixin,View):
     def get(self, request):
         object_list = employee_profile.objects.all()
         fm = EmployeeForm()

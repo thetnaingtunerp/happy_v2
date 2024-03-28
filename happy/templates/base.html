@@ -430,6 +430,12 @@
 								><span class="mtext">အရောင်းစာရင်းမှတ်တမ်း</span>
 							</a>
 						</li>
+						<li>
+							<a href="{% url 'myapp:SaleReportView' %}" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-cart4"></span
+								><span class="mtext">အဝယ်စာရင်းမှတ်တမ်း</span>
+							</a>
+						</li>
 						
 
 						<li class="dropdown">
@@ -440,10 +446,16 @@
 							<ul class="submenu">
 								<li><a href="{% url 'myapp:CategoryCreate' %}">CategoryCreate</a></li>
 								<li><a href="{% url 'myapp:ProductCreate' %}">ProductCreate</a></li>
-								{% comment %} <li><a href="{% url 'myapp:SupplierCreate' %}">Supplier Name</a></li> {% endcomment %}
+								<li><a href="{% url 'myapp:CreateSupplier' %}">Supplier Name</a></li>
 								<li><a href="{% url 'myapp:CreateMember' %}">CreateMember</a></li>
 								
 							</ul>
+						</li>
+						<li>
+							<a href="{% url 'employee:EmployeeView' %}" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-cart4"></span
+								><span class="mtext">ဝန်ထမ်း</span>
+							</a>
 						</li>
 						
 						

@@ -22,11 +22,21 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 
 
+class UserRequiredMixin(object):
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated & request.user.is_superuser:
+            pass
+        else:
+            return redirect('myapp:UserLoginView')
+        return super().dispatch(request, *args, **kwargs)
+
+
+
 # Create your views here.
 def test(request):
     return render(request, 'base.html')
 
-class DashboardView(TemplateView):
+class DashboardView(UserRequiredMixin,TemplateView):
     template_name = "dashboard.html"
 
 
@@ -51,15 +61,6 @@ class UserLogoutView(View):
     def get(self,request):
         logout(request)
         return redirect('myapp:UserLoginView')
-
-
-class UserRequiredMixin(object):
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            pass
-        else:
-            return redirect('myapp:UserLoginView')
-        return super().dispatch(request, *args, **kwargs)
 
 
 class CategoryCreate(UserRequiredMixin, View):
