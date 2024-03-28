@@ -7,71 +7,7 @@
 <div class="card-box mb-30">
     <div class="pd-20">
 
-        <a
-									href="#"
-									class="btn btn-outline-primary"
-									data-toggle="modal"
-									data-target="#Medium-modal"
-									type="button"
-								>
-									Filter By Date
-								</a>
-								<div
-									class="modal fade"
-									id="Medium-modal"
-									tabindex="-1"
-									role="dialog"
-									aria-labelledby="myLargeModalLabel"
-									aria-hidden="true"
-								>
-									<div class="modal-dialog modal-dialog-centered">
-                                        <!-- <form action="{% url 'myapp:CategoryCreate' %}" method="post">{% csrf_token %} -->
-										<div class="modal-content">
-											<div class="modal-header">
-												<h4 class="modal-title" id="myLargeModalLabel">
-													Filter By Date
-												</h4>
-												<button
-													type="button"
-													class="close"
-													data-dismiss="modal"
-													aria-hidden="true"
-												>
-													×
-												</button>
-											</div>
 
-											<div class="modal-body">
-                                                
-                                                <form action="{% url 'employee:AttendanceReport' %}" method="post">{% csrf_token %}
-                                                    <div class="form-group row pd-10">
-                                                        <label class="col-sm-12 col-md-4 col-form-label">FromDate</label>
-                                                        <div class="col-sm-12 col-md-8">
-                                                            <input class="form-control" type="date" placeholder="" name="sdate" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row pd-10">
-                                                        <label class="col-sm-12 col-md-4 col-form-label">To Date</label>
-                                                        <div class="col-sm-12 col-md-8">
-                                                            <input class="form-control" type="date" placeholder="" name="edate" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row pd-20">
-                                                        <label class="col-sm-12 col-md-4 col-form-label"></label>
-                                                        <input type="submit" value="Search" class="btn btn-block btn-outline-primary">
-                                                    </div>
-                                                </form>
-
-
-
-											</div>
-											<div class="modal-footer">
-												
-											</div>
-										</div>
-                                          
-									</div>
-								</div>
             <!-- ====================================================================== -->
             <a
 									href="#"
@@ -137,7 +73,7 @@
     <div class="pb-20">
         <table class="data-table table stripe hover nowrap">
             <thead>
-            <tr class="table-warning">
+            <tr class="table-primary">
 
                 <th>Image</th>
                 <th>Name</th>
@@ -145,7 +81,7 @@
                 <th>Fathername</th>
                 <th>Mothername</th>
                 <th>Phone</th>
-                <th>Address</th>
+                <th>Attendance</th>
                 <th>
                    Edit
                 </th>
@@ -162,13 +98,18 @@
                 <td>{{p.fathername}}</td>
                 <td>{{p.mothername}}</td>
                 <td>{{p.phone}}</td>
-                <td>{{p.address}}</td>
+                <td>
+                    <form action="{% url 'employee:DailyAttendance' %}" method="post">{% csrf_token %}
+                                <input type="number" name="eid" value="{{p.id}}" hidden>
+                                <input type="submit" value="Check In" class="btn btn-sm btn-outline-primary">
+                            </form>
+                </td>
                 <td>
                    {% comment %} <a href="{% url 'employee:EmpEditView' p.id %}" class="btn btn-sm btn-info"><i class="icon-copy dw dw-edit-1"></i></a> {% endcomment %}
                    
                    <a
                    href="#"
-                   class="btn btn-sm btn-outline-success"
+                   class="btn btn-sm btn-info"
                    data-toggle="modal"
                    data-target="#bd-example-modal-lg-{{p.id}}"
                    type="button"
@@ -494,6 +435,120 @@
         </table>
     </div>
 </div>
+
+
+
+<div class="">
+        <div class="card-box mb-30">
+            <div class="pd-20">
+
+                <a
+									href="#"
+									class="btn btn-outline-primary"
+									data-toggle="modal"
+									data-target="#Medium-modal"
+									type="button"
+								>
+									Filter By Date
+								</a>
+								<div
+									class="modal fade"
+									id="Medium-modal"
+									tabindex="-1"
+									role="dialog"
+									aria-labelledby="myLargeModalLabel"
+									aria-hidden="true"
+								>
+									<div class="modal-dialog modal-dialog-centered">
+                                        <!-- <form action="{% url 'myapp:CategoryCreate' %}" method="post">{% csrf_token %} -->
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myLargeModalLabel">
+													Filter By Date
+												</h4>
+												<button
+													type="button"
+													class="close"
+													data-dismiss="modal"
+													aria-hidden="true"
+												>
+													×
+												</button>
+											</div>
+
+											<div class="modal-body">
+
+                                                <form action="{% url 'employee:AttendanceReport' %}" method="post">{% csrf_token %}
+                                                    <div class="form-group row pd-10">
+                                                        <label class="col-sm-12 col-md-4 col-form-label">FromDate</label>
+                                                        <div class="col-sm-12 col-md-8">
+                                                            <input class="form-control" type="date" placeholder="" name="sdate" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row pd-10">
+                                                        <label class="col-sm-12 col-md-4 col-form-label">To Date</label>
+                                                        <div class="col-sm-12 col-md-8">
+                                                            <input class="form-control" type="date" placeholder="" name="edate" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row pd-20">
+                                                        <label class="col-sm-12 col-md-4 col-form-label"></label>
+                                                        <input type="submit" value="Search" class="btn btn-block btn-outline-primary">
+                                                    </div>
+                                                </form>
+
+
+
+											</div>
+											<div class="modal-footer">
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+            </div>
+<!--            <label class="pd-20"><h4 class=" text-blue">Daily Attendance</h4></label>-->
+
+                <table class="data-table table stripe hover">
+                    <thead>
+                    <tr class="table-warning">
+
+                        <th>Name</th>
+                        <th>Entry Time</th>
+                        <th>Time Out</th>
+
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for e in et %}
+                    <tr>
+                        <td class="table-plus"><a href="#"><b>{{e.employee}}</b></a></td>
+                        <td>{{e.entry_time}}</td>
+                        <td>
+
+                            {% if e.checkout_time %}
+                            {{e.checkout_time}}
+                            {% else %}
+                            <form action="{% url 'employee:EmpCheckout' %}" method="post">{% csrf_token %}
+                                <input type="number" name="aid" value="{{e.id}}" hidden>
+                                <input type="submit" value="CheckOut" class="btn btn-sm btn-danger">
+                            </form>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+        </div>
+
+</div>
+
+
 
 
 {% endblock content %}

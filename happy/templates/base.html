@@ -1,5 +1,5 @@
 {% load static %}
-<!DOCTYPE html>
+<!--<!DOCTYPE html>-->
 <html>
 	<head>
 		<!-- Basic Page Info -->
@@ -431,11 +431,18 @@
 							</a>
 						</li>
 						<li>
-							<a href="{% url 'myapp:SaleReportView' %}" class="dropdown-toggle no-arrow">
+							<a href="{% url 'myapp:PurchaseView' %}" class="dropdown-toggle no-arrow">
 								<span class="micon bi bi-cart4"></span
 								><span class="mtext">အဝယ်စာရင်းမှတ်တမ်း</span>
 							</a>
 						</li>
+						<li>
+							<a href="{% url 'employee:EmployeeView' %}" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-cart4"></span
+								><span class="mtext">ဝန်ထမ်းမှတ်တမ်း</span>
+							</a>
+						</li>
+
 						
 
 						<li class="dropdown">
@@ -451,12 +458,7 @@
 								
 							</ul>
 						</li>
-						<li>
-							<a href="{% url 'employee:EmployeeView' %}" class="dropdown-toggle no-arrow">
-								<span class="micon bi bi-cart4"></span
-								><span class="mtext">ဝန်ထမ်း</span>
-							</a>
-						</li>
+
 						
 						
 

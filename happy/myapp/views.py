@@ -25,7 +25,7 @@ from xhtml2pdf import pisa
 class UserRequiredMixin(object):
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated & request.user.is_superuser:
-            pass
+            return redirect('myapp:DashSetupView')
         else:
             return redirect('myapp:UserLoginView')
         return super().dispatch(request, *args, **kwargs)
@@ -36,7 +36,7 @@ class UserRequiredMixin(object):
 def test(request):
     return render(request, 'base.html')
 
-class DashboardView(UserRequiredMixin,TemplateView):
+class DashboardView(TemplateView):
     template_name = "dashboard.html"
 
 

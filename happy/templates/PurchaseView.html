@@ -5,10 +5,122 @@
 
 <div class="row">
 
-<div class="col-md-7">
+<div class="col-md-12">
     <div class="card-box mb-30">
         <div class="pd-20">
-            <h4 class="text-blue h4">Items</h4>
+             <a
+            href="#"
+            class="btn btn-md btn-primary"
+            data-toggle="modal"
+            data-target="#bd-example-modal-lg-{{p.id}}"
+            type="button"
+        >
+        View Cart Items List
+            <!-- <img src="vendors/images/modal-img1.jpg" alt="modal" /> -->
+        </a>
+        <div
+            class="modal fade bs-example-modal-lg"
+            id="bd-example-modal-lg-{{p.id}}"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="myLargeModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            Cart Item
+                        </h4>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-hidden="true"
+                        >
+                            ×
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="row">
+
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-30">
+
+        <div class="card-box mb-30">
+        <div class="pd-20">
+        <!-- cart table body  -->
+         <table class="table stripe hover nowrap">
+                <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>Item Name</th>
+
+                    <th>Rate</th>
+                    <th  class="text-right">Quantity</th>
+
+                    <th>Subtotal</th>
+                    {% if pcart.pcartproduct_set.all %}
+                    <th>Edit</th>
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for p in pcart.pcartproduct_set.all %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>
+                        <a href="#">{{p.product.itemname}}</a>
+
+
+                    </td>
+
+                    <td>{{p.rate}}</td>
+                    <td class="text-right">{{p.quantity}}|<span class="text-danger">{{p.product.iunit}}</span></td>
+
+                    <td>{{p.subtotal}}</td>
+                    <td>
+                        <a href="{% url 'myapp:ManageCartView' p.id %}?action=rmv"
+                           class="btn btn-sm btn-outline-danger"><i class="icon-copy dw dw-delete-3"></i></a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+
+
+                <tr>
+                    <td colspan="4" class="text-right">Total :</td>
+                    <td>{{pcart.total}}</td>
+
+
+                </tr>
+                <tr>
+                    {% if pcart.pcartproduct_set.all %}
+                    <td colspan="6"><a href="{% url 'myapp:PurchaseCheckoutView' %}" class="btn btn-primary btn-block">Create Purchase Form</a>
+                    </td>
+                    {% endif %}
+                </tr>
+
+
+
+                </tbody>
+            </table>
+        <!-- end  cart table  -->
+        </div>
+        </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
         </div>
         <div class="pb-20">
             <div class="pb-20">
@@ -119,68 +231,6 @@
     </div>
 </div>
 
-<div class="col-md-5">
-    <div class="card-box mb-30">
-        <div class="pb-20">
-            <table class="table stripe hover nowrap">
-                <thead>
-                <tr>
-                    <th>SN</th>
-                    <th>Item Name</th>
-    
-                    <th>Rate</th>
-                    <th  class="text-right">Quantity</th>
-                    
-                    <th>Subtotal</th>
-                    {% if pcart.pcartproduct_set.all %}
-                    <th>Edit</th>
-                    {% endif %}
-                </tr>
-                </thead>
-                <tbody>
-                {% for p in pcart.pcartproduct_set.all %}
-                <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>
-                        <a href="#">{{p.product.itemname}}</a>
-    
-    
-                    </td>
-    
-                    <td>{{p.rate}}</td>
-                    <td class="text-right">{{p.quantity}}|<span class="text-danger">{{p.product.iunit}}</span></td>
-                   
-                    <td>{{p.subtotal}}</td>
-                    <td>
-                        <a href="{% url 'myapp:ManageCartView' p.id %}?action=rmv"
-                           class="btn btn-sm btn-outline-danger"><i class="icon-copy dw dw-delete-3"></i></a>
-                    </td>
-    
-                </tr>
-                {% endfor %}
-    
-                
-    
-                <tr>
-                    <td colspan="4" class="text-right">Total :</td>
-                    <td>{{pcart.total}}</td>
-                    
-    
-                </tr>
-                <tr>
-                    {% if pcart.pcartproduct_set.all %}
-                    <td colspan="6"><a href="{% url 'myapp:PurchaseCheckoutView' %}" class="btn btn-primary btn-block">Create Purchase Form</a>
-                    </td>
-                    {% endif %}
-                </tr>
-    
-    
-    
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
 
 </div>
 <!-- =================================================== -->
