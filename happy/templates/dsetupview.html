@@ -287,7 +287,7 @@
 
     </div>
     <div class="pb-20">
-        <table class="data-table table stripe hover wrap">
+        <table class="data-table table stripe hover wrap" id="myTable">
             <thead>
             <tr class="">
 
@@ -339,5 +339,11 @@
     </div>
 </div>
 
+
+<script>
+    $('#myTable').DataTable( {
+    fixedHeader: true
+} );
+</script>
 
 {% endblock content %}

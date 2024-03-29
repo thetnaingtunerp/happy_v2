@@ -451,10 +451,11 @@
 								><span class="mtext">Setup</span>
 							</a>
 							<ul class="submenu">
-								<li><a href="{% url 'myapp:CategoryCreate' %}">CategoryCreate</a></li>
-								<li><a href="{% url 'myapp:ProductCreate' %}">ProductCreate</a></li>
-								<li><a href="{% url 'myapp:CreateSupplier' %}">Supplier Name</a></li>
-								<li><a href="{% url 'myapp:CreateMember' %}">CreateMember</a></li>
+								<li><a href="{% url 'myapp:CategoryCreate' %}">Category</a></li>
+								<li><a href="{% url 'myapp:UnitCreateView' %}">Unit</a></li>
+								<li><a href="{% url 'myapp:DashSetupView' %}">Product</a></li>
+								<li><a href="{% url 'myapp:CreateSupplier' %}">Supplier</a></li>
+								<li><a href="{% url 'myapp:CreateMember' %}">Member</a></li>
 								
 							</ul>
 						</li>
@@ -484,6 +485,34 @@
 					<!-- Simple Datatable start -->
 					{% block content %}{% endblock content %}
 					<!-- Simple Datatable End -->
+
+					{% block datatablescr %}
+
+    <link
+			rel="stylesheet"
+			type="text/css"
+			href="{% static 'src/plugins/datatables/fixedheader/fixcol.css' %}"
+		/>
+<link
+			rel="stylesheet"
+			type="text/css"
+			href="{% static 'src/plugins/datatables/fixedheader/fixheader.css' %}"
+		/>
+<link
+			rel="stylesheet"
+			type="text/css"
+			href="{% static 'src/plugins/datatables/fixedheader/tablefix.css' %}"
+		/>
+
+
+<script>
+    <script src="{% static 'src/plugins/datatables/fixedheader/custom.js' %}"></script>
+<script src="{% static 'src/plugins/datatables/fixedheader/jqery.js' %}"></script>
+    <script src="{% static 'src/plugins/datatables/fixedheader/fixedColumns.dataTables.js' %}"></script>
+    <script src="{% static 'src/plugins/datatables/fixedheader/fixedColumns.js' %}"></script>
+    <script src="{% static 'src/plugins/datatables/fixedheader/fixedHeader.dataTables.js' %}"></script>
+    <script src="{% static 'src/plugins/datatables/fixedheader/fixedHeader.js' %}"></script>
+					{% endblock datatablescr %}
 
 				</div>
 <!--				<div class="footer-wrap pd-20 mb-20 card-box">-->

@@ -10,11 +10,13 @@
     </div>
     <div class="pb-20">
         <table
-                class="table hover data-table-export nowrap"
+                class="data-table table hover"
+                id="example"
+                style="width:100%"
         >
             <thead>
             <tr class="">
-                <th class="table-plus datatable-nosort">InvoiceNo</th>
+                <th class="">InvoiceNo</th>
                 <th>Amount</th>
                 <th>Member</th>
                 <th>Date</th>
@@ -51,6 +53,8 @@
                 <!--                <td><strong>{{sum}}</strong></td>-->
                 <td></td>
                 <td></td>
+                <td></td>
+                <td></td>
             </tr>
             </tfoot>
         </table>
@@ -74,3 +78,14 @@
 
 
 {% endblock content %}
+
+
+{% block datatablescr %}
+
+<!--fixed header script -->
+{% load static %}
+
+</script>
+<!--end fixed header script-->
+
+{% endblock datatablescr %}
