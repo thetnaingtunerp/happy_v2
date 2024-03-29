@@ -24,11 +24,21 @@ from xhtml2pdf import pisa
 
 class UserRequiredMixin(object):
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated & request.user.is_superuser:
-            return redirect('myapp:DashSetupView')
+        if request.user.is_authenticated:
+            pass
         else:
             return redirect('myapp:UserLoginView')
         return super().dispatch(request, *args, **kwargs)
+
+
+class SuperUserRequiredMixin(object):
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated & request.user.is_superuser:
+            pass
+        else:
+            return redirect('myapp:UserLoginView')
+        return super().dispatch(request, *args, **kwargs)
+
 
 
 

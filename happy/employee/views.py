@@ -17,7 +17,7 @@ from django.forms import modelformset_factory
 from django.urls import reverse
 
 
-class UserRequiredMixin(object):
+class SuperUserRequiredMixin(object):
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated & request.user.is_superuser:
             pass
@@ -27,7 +27,7 @@ class UserRequiredMixin(object):
 
 
 
-class EmployeeView(UserRequiredMixin,View):
+class EmployeeView(SuperUserRequiredMixin,View):
     def get(self, request):
         object_list = employee_profile.objects.all()
         et = employee_attendance.objects.filter(created_at=datetime.datetime.now())
@@ -36,13 +36,22 @@ class EmployeeView(UserRequiredMixin,View):
         return render(request, 'EmployeeView.html', context)
 
     def post(self, request):
-        fm = EmployeeForm(request.POST)
-        if fm.is_valid():
-            fm.save()
+        employee_name = request.POST.get('employee_name')
+        nrc_no = request.POST.get('nrc_no')
+        fathername = request.POST.get('fathername')
+        mothername = request.POST.get('mothername')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        dob = request.POST.get('dob')
+        entrydate = request.POST.get('entrydate')
+        salary = request.POST.get('salary')
+        photo = request.FILES['photo']
+        e = employee_profile(employee_name=employee_name, nrc_no=nrc_no, fathername=fathername,mothername=mothername, phone=phone, address=address, dob=dob, entrydate=entrydate, photo=photo, salary=salary)
+        e.save()
         return redirect(request.META['HTTP_REFERER'])
 
 
-class EmpEditView(View):
+class EmpEditView(SuperUserRequiredMixin, View):
     def get(self,request, pk):
         pi = employee_profile.objects.get(id=pk)
         fm = EmployeeForm(instance=pi)
@@ -55,7 +64,7 @@ class EmpEditView(View):
             fm.save()
         return redirect('employee:EmployeeView')
 
-class DailyAttendance(View):
+class DailyAttendance(SuperUserRequiredMixin, View):
     def get(self, request):
         ep = employee_profile.objects.all()
         et = employee_attendance.objects.filter(created_at=datetime.datetime.now())
@@ -77,14 +86,14 @@ class DailyAttendance(View):
 
         
 
-class EmpCheckout(View):
+class EmpCheckout(SuperUserRequiredMixin, View):
     def post(self, request):
         ed = request.POST.get('aid')
         today = datetime.datetime.now()
         et = employee_attendance.objects.filter(id=ed).update(checkout_time=today)
         return redirect(request.META['HTTP_REFERER'])
 
-class AttendanceReport(View):
+class AttendanceReport(SuperUserRequiredMixin, View):
     def get(self, request):
         ep = employee_profile.objects.all()
         et = employee_attendance.objects.all()

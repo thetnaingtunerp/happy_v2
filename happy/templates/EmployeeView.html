@@ -8,66 +8,150 @@
     <div class="pd-20">
 
 
-            <!-- ====================================================================== -->
-            <a
-									href="#"
-									class="btn btn-outline-primary"
-									data-toggle="modal"
-									data-target="#Medium-modal1"
-									type="button"
-								>
-									Create Employee
-								</a>
-								<div
-									class="modal fade"
-									id="Medium-modal1"
-									tabindex="-1"
-									role="dialog"
-									aria-labelledby="myLargeModalLabel"
-									aria-hidden="true"
-								>
-									<div class="modal-dialog modal-dialog-centered">
-                                        <!-- <form action="{% url 'myapp:CategoryCreate' %}" method="post">{% csrf_token %} -->
-										<div class="modal-content">
-											<div class="modal-header">
-												<h4 class="modal-title" id="myLargeModalLabel">
-													Create Employee
-												</h4>
-												<button
-													type="button"
-													class="close"
-													data-dismiss="modal"
-													aria-hidden="true"
-												>
-													×
-												</button>
-											</div>
+        <!-- ====================================================================== -->
+        <a
+                href="#"
+                class="btn btn-outline-primary"
+                data-toggle="modal"
+                data-target="#Medium-modal1"
+                type="button"
+        >
+            Create Employee
+        </a>
+        <div
+                class="modal fade"
+                id="Medium-modal1"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="myLargeModalLabel"
+                aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <!-- <form action="{% url 'myapp:CategoryCreate' %}" method="post">{% csrf_token %} -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            Create Employee
+                        </h4>
+                        <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-hidden="true"
+                        >
+                            ×
+                        </button>
+                    </div>
 
-											<div class="modal-body">
-                                                
-                                                <form action="" method="post" >{% csrf_token %}
-            
-                                                    {{form}}
-                                                
-                                                    <input type="submit" value="Save" class="btn btn-success btn-block">
-                                                </form>
+                    <div class="modal-body">
+
+                        <form action="{% url 'employee:EmployeeView' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+                            {% comment %} {{form}} {% endcomment %}
+                            <div class="form-group">
+                                <label>အမည်</label>
+                                <input
+                                        class="form-control form-control-lg"
+                                        type="text"
+                                        name="employee_name"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>မှတ်ပုံတင် အမှတ်</label>
+                                <input
+                                        class="form-control form-control-lg"
+                                        type="text"
+                                        name="nrc_no"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label>အဖ အမည်</label>
+                                <input
+                                        class="form-control form-control-lg"
+                                        type="text"
+                                        name="fathername"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label>အမိ အမည်</label>
+                                <input
+                                        class="form-control form-control-lg"
+                                        type="text"
+                                        name="mothername"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>ဆက်သွယ်ရန် ဖုန်းနံပါတ်</label>
+                                <input
+                                        class="form-control form-control-lg"
+                                        type="text"
+                                        name="phone"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label>မွေးနေ့</label>
+                                <input
+                                        class="form-control form-control-lg"
+                                        type="date"
+                                        name="dob"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label>နေရပ်လိပ်စာ</label>
+                                <input
+                                        class="form-control form-control-lg"
+                                        type="text"
+                                        name="address"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label>အလုပ်စဝင်သည့်နေ့</label>
+                                <input
+                                        class="form-control form-control-lg"
+                                        type="date"
+                                        name="entrydate"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>ဓါတ်ပုံ</label>
+                                <input
+                                        class="form-control form-control-lg"
+                                        type="file"
+                                        name="photo"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label>လစာ</label>
+                                <input
+                                        class="form-control form-control-lg"
+                                        type="number"
+                                        name="salary"
+                                />
+                            </div>
 
 
 
-											</div>
-											<div class="modal-footer">
-												
-											</div>
-										</div>
-                                          
-									</div>
-								</div>
-
-                                <!-- =============================================== -->
+                            <input type="submit" value="Save" class="btn btn-success btn-block">
+                        </form>
 
 
-                                <!-- =============================================== -->
-        
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- =============================================== -->
+
+
+        <!-- =============================================== -->
+
 
     </div>
     <div class="pb-20">
@@ -83,349 +167,352 @@
                 <th>Phone</th>
                 <th>Attendance</th>
                 <th>
-                   Edit
+                    Edit
                 </th>
-                
+
 
             </tr>
             </thead>
             <tbody>
             {% for p in object_list %}
             <tr>
-                <td class="table-plus"><img src="{{p.photo.url}}" alt="" width="50px"></td>
-                <td>{{p.employee_name}}| ({{p.gender}})</td>
+                <td class="table-plus">
+                
+                <img src="{{p.photo.url}}" width="50px">
+                
+                </td>
+                <td>{{p.employee_name}}</td>
                 <td>{{p.nrc_no}}</td>
                 <td>{{p.fathername}}</td>
                 <td>{{p.mothername}}</td>
                 <td>{{p.phone}}</td>
                 <td>
                     <form action="{% url 'employee:DailyAttendance' %}" method="post">{% csrf_token %}
-                                <input type="number" name="eid" value="{{p.id}}" hidden>
-                                <input type="submit" value="Check In" class="btn btn-sm btn-outline-primary">
-                            </form>
+                        <input type="number" name="eid" value="{{p.id}}" hidden>
+                        <input type="submit" value="Check In" class="btn btn-sm btn-outline-primary">
+                    </form>
                 </td>
                 <td>
-                   {% comment %} <a href="{% url 'employee:EmpEditView' p.id %}" class="btn btn-sm btn-info"><i class="icon-copy dw dw-edit-1"></i></a> {% endcomment %}
-                   
-                   <a
-                   href="#"
-                   class="btn btn-sm btn-info"
-                   data-toggle="modal"
-                   data-target="#bd-example-modal-lg-{{p.id}}"
-                   type="button"
-               >
-               Edit
-                   <!-- <img src="vendors/images/modal-img1.jpg" alt="modal" /> -->
-               </a>
-               <div
-                   class="modal fade bs-example-modal-lg"
-                   id="bd-example-modal-lg-{{p.id}}"
-                   tabindex="-1"
-                   role="dialog"
-                   aria-labelledby="myLargeModalLabel"
-                   aria-hidden="true"
-               >
-                   <div class="modal-dialog modal-lg modal-dialog-centered">
-                       <div class="modal-content">
-                           <div class="modal-header">
-                               <h4 class="modal-title" id="myLargeModalLabel">
-                                   ID-{{p.id}}
-                               </h4>
-                               <button
-                                   type="button"
-                                   class="close"
-                                   data-dismiss="modal"
-                                   aria-hidden="true"
-                               >
-                                   ×
-                               </button>
-                           </div>
-                           <div class="modal-body">
-                               
+                    {% comment %} <a href="{% url 'employee:EmpEditView' p.id %}" class="btn btn-sm btn-info"><i
+                        class="icon-copy dw dw-edit-1"></i></a> {% endcomment %}
 
-                               <div class="row">
-                                   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
-                                       <div class="pd-20 card-box height-100-p">
-                                           <div class="profile-photo">
-                                               <a
-                                                   href="modal"
-                                                   data-toggle="modal"
-                                                   data-target="#modal"
-                                                   class="edit-avatar"
-                                                   ><i class="fa fa-pencil"></i
-                                               ></a>
-                                               <img
-                                                   src="{{p.photo.url}}"
-                                                   alt=""
-                                                   class="avatar-photo"
-                                               />
-                                               <div
-                                                   class="modal fade"
-                                                   id="modal"
-                                                   tabindex="-1"
-                                                   role="dialog"
-                                                   aria-labelledby="modalLabel"
-                                                   aria-hidden="true"
-                                               >
-                                                   <div
-                                                       class="modal-dialog modal-dialog-centered"
-                                                       role="document"
-                                                   >
-                                                       <div class="modal-content">
-                                                           <div class="modal-body pd-5">
-                                                               <div class="img-container">
-                                                                   <img
-                                                                       id="image"
-                                                                       src="{{p.photo.url}}"
-                                                                       alt="Picture"
-                                                                   />
-                                                               </div>
-                                                           </div>
-                                                           <div class="modal-footer">
-                                                               <input
-                                                                   type="submit"
-                                                                   value="Update"
-                                                                   class="btn btn-primary"
-                                                               />
-                                                               <button
-                                                                   type="button"
-                                                                   class="btn btn-default"
-                                                                   data-dismiss="modal"
-                                                               >
-                                                                   Close
-                                                               </button>
-                                                           </div>
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                           <h5 class="text-center h5 mb-0">{{p.employee_name}}</h5>
-                                           <p class="text-center text-muted font-14">
-                                               
-                                           </p>
-                                           <div class="profile-info">
-                                               <h5 class="mb-20 h5 text-blue">Contact Information</h5>
-                                               <ul>
-                                                   <li>
-                                                       <span>NRC :</span>
-                                                       {{p.nrc_no}}
-                                                   </li>
-                                                   <li>
-                                                       <span>Phone Number:</span>
-                                                       {{p.phone}}
-                                                   </li>
-                                                   <li>
-                                                       <span>Date of Birth:</span>
-                                                       {{p.dob}}
-                                                   </li>
-                                                   <li>
-                                                       <span>Address:</span>
-                                                       <br />
-                                                       {{p.address}}
-                                                   </li>
-                                               </ul>
-                                           </div>
-                                           
-                                          
-                                       </div>
-                                   </div>
-                                   <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30">
-                                       <div class="card-box height-100-p overflow-hidden">
-                                           <div class="profile-tab height-100-p">
-                                               <div class="tab height-100-p">
-                                                   <ul class="nav nav-tabs customtab" role="tablist">
-                                                       <li class="nav-item">
-                                                           <a
-                                                               class="nav-link active"
-                                                               data-toggle="tab"
-                                                               href="#timeline"
-                                                               role="tab"
-                                                               >Edit Profile</a
-                                                           >
-                                                       </li>
-                                                       
-                                                       
-                                                   </ul>
-                                                   <div class="tab-content">
-                                                       <!-- Timeline Tab start -->
-                                                       <div
-                                                           class="tab-pane fade show active"
-                                                           id="timeline"
-                                                           role="tabpanel"
-                                                       >
-                                                           <div class="pd-20">
-                                                               <div class="profile-setting">
-                                                                   <form>
-                                                                       <ul class="profile-edit-list row">
-                                                                           <li class="weight-500 col-md-6">
-                                                                               {% comment %} <h4 class="text-blue h5 mb-20">
-                                                                                   Edit Your Personal Setting
-                                                                               </h4> {% endcomment %}
-                                                                               <div class="form-group">
-                                                                                   <label>Full Name</label>
-                                                                                   <input
-                                                                                       class="form-control form-control-lg"
-                                                                                       type="text"
-                                                                                   />
-                                                                               </div>
-                                                                               <div class="form-group">
-                                                                                   <label>NRC Number</label>
-                                                                                   <input
-                                                                                       class="form-control form-control-lg"
-                                                                                       type="text"
-                                                                                   />
-                                                                               </div>
-                                                                               <div class="form-group">
-                                                                                   <label>Father Name</label>
-                                                                                   <input
-                                                                                       class="form-control form-control-lg"
-                                                                                       type="email"
-                                                                                   />
-                                                                               </div>
-                                                                               <div class="form-group">
-                                                                                   <label>Mother Name</label>
-                                                                                   <input
-                                                                                       class="form-control form-control-lg"
-                                                                                       type="email"
-                                                                                   />
-                                                                               </div>
-                                                                               <div class="form-group">
-                                                                                   <label>Date of birth</label>
-                                                                                   <input
-                                                                                       class="form-control form-control-lg date-picker"
-                                                                                       type="text"
-                                                                                   />
-                                                                               </div>
-                                                                               
-                                                                               <div class="form-group">
-                                                                                   <label>Gender</label>
-                                                                                   <div class="d-flex">
-                                                                                       <div
-                                                                                           class="custom-control custom-radio mb-5 mr-20"
-                                                                                       >
-                                                                                           <input
-                                                                                               type="radio"
-                                                                                               id="customRadio4"
-                                                                                               name="customRadio"
-                                                                                               class="custom-control-input"
-                                                                                           />
-                                                                                           <label
-                                                                                               class="custom-control-label weight-400"
-                                                                                               for="customRadio4"
-                                                                                               >Male</label
-                                                                                           >
-                                                                                       </div>
-                                                                                       <div
-                                                                                           class="custom-control custom-radio mb-5"
-                                                                                       >
-                                                                                           <input
-                                                                                               type="radio"
-                                                                                               id="customRadio5"
-                                                                                               name="customRadio"
-                                                                                               class="custom-control-input"
-                                                                                           />
-                                                                                           <label
-                                                                                               class="custom-control-label weight-400"
-                                                                                               for="customRadio5"
-                                                                                               >Female</label
-                                                                                           >
-                                                                                       </div>
-                                                                                   </div>
-                                                                               </div>
-                                                                               
-                                                                               <div class="form-group">
-                                                                                   <div
-                                                                                       class="custom-control custom-checkbox mb-5"
-                                                                                   >
-                                                                                       <input
-                                                                                           type="checkbox"
-                                                                                           class="custom-control-input"
-                                                                                           id="customCheck1-1"
-                                                                                       />
-                                                                                       <label
-                                                                                           class="custom-control-label weight-400"
-                                                                                           for="customCheck1-1"
-                                                                                           >Active</label
-                                                                                       >
-                                                                                   </div>
-                                                                               </div>
-                                                                               
-                                                                           </li>
-                                                                           <li class="weight-500 col-md-6">
-                                                                               {% comment %} <h4 class="text-blue h5 mb-20">
-                                                                                   Edit Social Media links
-                                                                               </h4> {% endcomment %}
-                                                                               <div class="form-group">
-                                                                                   <label>Entry Date</label>
-                                                                                   <input
-                                                                                       class="form-control form-control-lg date-picker"
-                                                                                       type="text"
-                                                                                   />
-                                                                               </div>
-                                                                               <div class="form-group">
-                                                                                   <label>Phone Number</label>
-                                                                                   <input
-                                                                                       class="form-control form-control-lg"
-                                                                                       type="number"
-                                                                                   />
-                                                                               </div>
-                                                                               <div class="form-group">
-                                                                                   <label>Salary</label>
-                                                                                   <input
-                                                                                       class="form-control form-control-lg"
-                                                                                       type="salary"
-                                                                                   />
-                                                                               </div>
-                                                                               <div class="form-group">
-                                                                                   <label>Daily</label>
-                                                                                   <input
-                                                                                       class="form-control form-control-lg"
-                                                                                       type="salary"
-                                                                                   />
-                                                                               </div>
+                    <a
+                            href="#"
+                            class="btn btn-sm btn-info"
+                            data-toggle="modal"
+                            data-target="#bd-example-modal-lg-{{p.id}}"
+                            type="button"
+                    >
+                        Edit
+                        <!-- <img src="vendors/images/modal-img1.jpg" alt="modal" /> -->
+                    </a>
+                    <div
+                            class="modal fade bs-example-modal-lg"
+                            id="bd-example-modal-lg-{{p.id}}"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="myLargeModalLabel"
+                            aria-hidden="true"
+                    >
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myLargeModalLabel">
+                                        ID-{{p.id}}
+                                    </h4>
+                                    <button
+                                            type="button"
+                                            class="close"
+                                            data-dismiss="modal"
+                                            aria-hidden="true"
+                                    >
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
 
 
-                                                                               
-                                                                           </li>
-                                                                       </ul>
-                                                                   </form>
-                                                               </div>
-                                                           </div>
-                                                       </div>
-                                                       <!-- Timeline Tab End -->
-                                                       
-                                                       <!-- Setting Tab start -->
-                                                       
-                                                       <!-- Setting Tab End -->
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
+                                            <div class="pd-20 card-box height-100-p">
+                                                <div class="profile-photo">
 
-                               
-                           </div>
-                           <div class="modal-footer">
-                               <button
-                                   type="button"
-                                   class="btn btn-secondary"
-                                   data-dismiss="modal"
-                               >
-                                   Close
-                               </button>
-                               <button type="button" class="btn btn-primary">
-                                   Save changes
-                               </button>
-                           </div>
-                       </div>
-                   </div>
-               </div>
+                                                    <img
+                                                            src="{{p.photo.url}}"
+                                                            alt=""
+                                                            class="avatar-photo"
+                                                    />
+                                                    <div
+                                                            class="modal fade"
+                                                            id="modal"
+                                                            tabindex="-1"
+                                                            role="dialog"
+                                                            aria-labelledby="modalLabel"
+                                                            aria-hidden="true"
+                                                    >
+                                                        <div
+                                                                class="modal-dialog modal-dialog-centered"
+                                                                role="document"
+                                                        >
+                                                            <div class="modal-content">
+                                                                <div class="modal-body pd-5">
+                                                                    <div class="img-container">
+                                                                        <img
+                                                                                id="image"
+                                                                                src="{{p.photo.url}}"
+                                                                                alt="Picture"
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input
+                                                                            type="submit"
+                                                                            value="Update"
+                                                                            class="btn btn-primary"
+                                                                    />
+                                                                    <button
+                                                                            type="button"
+                                                                            class="btn btn-default"
+                                                                            data-dismiss="modal"
+                                                                    >
+                                                                        Close
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <h5 class="text-center h5 mb-0">{{p.employee_name}}</h5>
+                                                <p class="text-center text-muted font-14">
+
+                                                </p>
+                                                <div class="profile-info">
+                                                    <h5 class="mb-20 h5 text-blue">Contact Information</h5>
+                                                    <ul>
+                                                        <li>
+                                                            <span>NRC :</span>
+                                                            {{p.nrc_no}}
+                                                        </li>
+                                                        <li>
+                                                            <span>Phone Number:</span>
+                                                            {{p.phone}}
+                                                        </li>
+                                                        <li>
+                                                            <span>Date of Birth:</span>
+                                                            {{p.dob}}
+                                                        </li>
+                                                        <li>
+                                                            <span>Address:</span>
+                                                            <br/>
+                                                            {{p.address}}
+                                                        </li>
+                                                    </ul>
+                                                </div>
 
 
-<!-- Large modal -->
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30">
+                                            <div class="card-box height-100-p overflow-hidden">
+                                                <div class="profile-tab height-100-p">
+                                                    <div class="tab height-100-p">
+                                                        <ul class="nav nav-tabs customtab" role="tablist">
+                                                            <li class="nav-item">
+                                                                <a
+                                                                        class="nav-link active"
+                                                                        data-toggle="tab"
+                                                                        href="#timeline"
+                                                                        role="tab"
+                                                                >Edit Profile</a
+                                                                >
+                                                            </li>
+
+
+                                                        </ul>
+                                                        <div class="tab-content">
+                                                            <!-- Timeline Tab start -->
+                                                            <div
+                                                                    class="tab-pane fade show active"
+                                                                    id="timeline"
+                                                                    role="tabpanel"
+                                                            >
+                                                                <div class="pd-20">
+                                                                    <div class="profile-setting">
+                                                                        <form action="" method="post">{% csrf_token %}
+                                                                            <ul class="profile-edit-list row">
+                                                                                <li class="weight-500 col-md-6">
+                                                                                    {% comment %} <h4
+                                                                                        class="text-blue h5 mb-20">
+                                                                                    Edit Your Personal Setting
+                                                                                </h4> {% endcomment %}
+                                                                                    <div class="form-group">
+                                                                                        <label class="text-primary">Full Name</label>
+                                                                                        <input
+                                                                                                class="form-control form-control-lg"
+                                                                                                type="text"
+                                                                                                value="{{p.employee_name}}"
+                                                                                        />
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label class="text-primary">NRC Number</label>
+                                                                                        <input
+                                                                                                class="form-control form-control-lg"
+                                                                                                type="text"
+                                                                                                value="{{p.nrc_no}}"
+                                                                                        />
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label class="text-primary">Father Name</label>
+                                                                                        <input
+                                                                                                class="form-control form-control-lg"
+                                                                                                type="email"
+                                                                                                value="{{p.fathername}}"
+                                                                                        />
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label class="text-primary">Mother Name</label>
+                                                                                        <input
+                                                                                                class="form-control form-control-lg"
+                                                                                                type="email"
+                                                                                                value="{{p.mothername}}"
+                                                                                        />
+                                                                                    </div>
+                                                                                    
+
+<!--                                                                                    <div class="form-group">-->
+<!--                                                                                        <label>Gender</label>-->
+<!--                                                                                        <div class="d-flex">-->
+<!--                                                                                            <div-->
+<!--                                                                                                    class="custom-control custom-radio mb-5 mr-20"-->
+<!--                                                                                            >-->
+<!--                                                                                                <input-->
+<!--                                                                                                        type="radio"-->
+<!--                                                                                                        id="customRadio4"-->
+<!--                                                                                                        name="customRadio"-->
+<!--                                                                                                        class="custom-control-input"-->
+<!--                                                                                                />-->
+<!--                                                                                                <label-->
+<!--                                                                                                        class="custom-control-label weight-400"-->
+<!--                                                                                                        for="customRadio4"-->
+<!--                                                                                                >Male</label-->
+<!--                                                                                                >-->
+<!--                                                                                            </div>-->
+<!--                                                                                            <div-->
+<!--                                                                                                    class="custom-control custom-radio mb-5"-->
+<!--                                                                                            >-->
+<!--                                                                                                <input-->
+<!--                                                                                                        type="radio"-->
+<!--                                                                                                        id="customRadio5"-->
+<!--                                                                                                        name="customRadio"-->
+<!--                                                                                                        class="custom-control-input"-->
+<!--                                                                                                />-->
+<!--                                                                                                <label-->
+<!--                                                                                                        class="custom-control-label weight-400"-->
+<!--                                                                                                        for="customRadio5"-->
+<!--                                                                                                >Female</label-->
+<!--                                                                                                >-->
+<!--                                                                                            </div>-->
+<!--                                                                                        </div>-->
+<!--                                                                                    </div>-->
+
+                                                                                    {% comment %} <div class="form-group">
+                                                                                        <div
+                                                                                                class="custom-control custom-checkbox mb-5"
+                                                                                        >
+                                                                                            <input
+                                                                                                    type="checkbox"
+                                                                                                    class="custom-control-input"
+                                                                                                    id="customCheck1-1"
+                                                                                            />
+                                                                                            <label
+                                                                                                    class="custom-control-label weight-400"
+                                                                                                    for="customCheck1-1"
+                                                                                            >Active</label
+                                                                                            >
+                                                                                        </div>
+                                                                                    </div> {% endcomment %}
+
+                                                                                </li>
+                                                                                <li class="weight-500 col-md-6">
+                                                                                    {% comment %} <h4
+                                                                                        class="text-blue h5 mb-20">
+                                                                                    Edit Social Media links
+                                                                                </h4> {% endcomment %}
+                                                                                <div class="form-group">
+                                                                                    <label class="text-primary">Date of birth</label>
+                                                                                    <input
+                                                                                            class="form-control form-control-lg date-picker"
+                                                                                            type="text"
+                                                                                            value="{{p.dob}}"
+                                                                                    />
+                                                                                </div>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="text-primary">Entry Date</label>
+                                                                                        <input
+                                                                                                class="form-control form-control-lg date-picker"
+                                                                                                type="text"
+                                                                                                value="{{p.entrydate}}"
+                                                                                        />
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label class="text-primary">Phone Number</label>
+                                                                                        <input
+                                                                                                class="form-control form-control-lg"
+                                                                                                type="number"
+                                                                                                value="{{p.phone}}"
+                                                                                        />
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label class=" text-blue">Salary</label>
+                                                                                        <input
+                                                                                                class="form-control form-control-lg"
+                                                                                                type="salary"
+                                                                                                value="{{p.salary}}"
+                                                                                        />
+                                                                                    </div>
+
+
+
+                                                                                </li>
+                                                                            </ul>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Timeline Tab End -->
+
+                                                            <!-- Setting Tab start -->
+
+                                                            <!-- Setting Tab End -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button
+                                            type="button"
+                                            class="btn btn-secondary"
+                                            data-dismiss="modal"
+                                    >
+                                        Close
+                                    </button>
+                                    <button type="button" class="btn btn-primary">
+                                        Save changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Large modal -->
                 </td>
-                
 
 
             </tr>
@@ -437,118 +524,113 @@
 </div>
 
 
-
 <div class="">
-        <div class="card-box mb-30">
-            <div class="pd-20">
+    <div class="card-box mb-30">
+        <div class="pd-20">
 
-                <a
-									href="#"
-									class="btn btn-outline-primary"
-									data-toggle="modal"
-									data-target="#Medium-modal"
-									type="button"
-								>
-									Filter By Date
-								</a>
-								<div
-									class="modal fade"
-									id="Medium-modal"
-									tabindex="-1"
-									role="dialog"
-									aria-labelledby="myLargeModalLabel"
-									aria-hidden="true"
-								>
-									<div class="modal-dialog modal-dialog-centered">
-                                        <!-- <form action="{% url 'myapp:CategoryCreate' %}" method="post">{% csrf_token %} -->
-										<div class="modal-content">
-											<div class="modal-header">
-												<h4 class="modal-title" id="myLargeModalLabel">
-													Filter By Date
-												</h4>
-												<button
-													type="button"
-													class="close"
-													data-dismiss="modal"
-													aria-hidden="true"
-												>
-													×
-												</button>
-											</div>
+            <a
+                    href="#"
+                    class="btn btn-outline-primary"
+                    data-toggle="modal"
+                    data-target="#Medium-modal"
+                    type="button"
+            >
+                Filter By Date
+            </a>
+            <div
+                    class="modal fade"
+                    id="Medium-modal"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="myLargeModalLabel"
+                    aria-hidden="true"
+            >
+                <div class="modal-dialog modal-dialog-centered">
+                    <!-- <form action="{% url 'myapp:CategoryCreate' %}" method="post">{% csrf_token %} -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel">
+                                Filter By Date
+                            </h4>
+                            <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-hidden="true"
+                            >
+                                ×
+                            </button>
+                        </div>
 
-											<div class="modal-body">
+                        <div class="modal-body">
 
-                                                <form action="{% url 'employee:AttendanceReport' %}" method="post">{% csrf_token %}
-                                                    <div class="form-group row pd-10">
-                                                        <label class="col-sm-12 col-md-4 col-form-label">FromDate</label>
-                                                        <div class="col-sm-12 col-md-8">
-                                                            <input class="form-control" type="date" placeholder="" name="sdate" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row pd-10">
-                                                        <label class="col-sm-12 col-md-4 col-form-label">To Date</label>
-                                                        <div class="col-sm-12 col-md-8">
-                                                            <input class="form-control" type="date" placeholder="" name="edate" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row pd-20">
-                                                        <label class="col-sm-12 col-md-4 col-form-label"></label>
-                                                        <input type="submit" value="Search" class="btn btn-block btn-outline-primary">
-                                                    </div>
-                                                </form>
-
-
-
-											</div>
-											<div class="modal-footer">
-
-											</div>
-										</div>
-
-									</div>
-								</div>
-            </div>
-<!--            <label class="pd-20"><h4 class=" text-blue">Daily Attendance</h4></label>-->
-
-                <table class="data-table table stripe hover">
-                    <thead>
-                    <tr class="table-warning">
-
-                        <th>Name</th>
-                        <th>Entry Time</th>
-                        <th>Time Out</th>
-
-
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for e in et %}
-                    <tr>
-                        <td class="table-plus"><a href="#"><b>{{e.employee}}</b></a></td>
-                        <td>{{e.entry_time}}</td>
-                        <td>
-
-                            {% if e.checkout_time %}
-                            {{e.checkout_time}}
-                            {% else %}
-                            <form action="{% url 'employee:EmpCheckout' %}" method="post">{% csrf_token %}
-                                <input type="number" name="aid" value="{{e.id}}" hidden>
-                                <input type="submit" value="CheckOut" class="btn btn-sm btn-danger">
+                            <form action="{% url 'employee:AttendanceReport' %}" method="post">{% csrf_token %}
+                                <div class="form-group row pd-10">
+                                    <label class="col-sm-12 col-md-4 col-form-label">FromDate</label>
+                                    <div class="col-sm-12 col-md-8">
+                                        <input class="form-control" type="date" placeholder="" name="sdate" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row pd-10">
+                                    <label class="col-sm-12 col-md-4 col-form-label">To Date</label>
+                                    <div class="col-sm-12 col-md-8">
+                                        <input class="form-control" type="date" placeholder="" name="edate" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row pd-20">
+                                    <label class="col-sm-12 col-md-4 col-form-label"></label>
+                                    <input type="submit" value="Search" class="btn btn-block btn-outline-primary">
+                                </div>
                             </form>
-                            {% endif %}
-                        </td>
 
-                    </tr>
-                    {% endfor %}
 
-                    </tbody>
-                </table>
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
+        <!--            <label class="pd-20"><h4 class=" text-blue">Daily Attendance</h4></label>-->
+
+        <table class="data-table table stripe hover">
+            <thead>
+            <tr class="table-warning">
+
+                <th>Name</th>
+                <th>Entry Time</th>
+                <th>Time Out</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for e in et %}
+            <tr>
+                <td class="table-plus"><a href="#"><b>{{e.employee}}</b></a></td>
+                <td>{{e.entry_time}}</td>
+                <td>
+
+                    {% if e.checkout_time %}
+                    {{e.checkout_time}}
+                    {% else %}
+                    <form action="{% url 'employee:EmpCheckout' %}" method="post">{% csrf_token %}
+                        <input type="number" name="aid" value="{{e.id}}" hidden>
+                        <input type="submit" value="CheckOut" class="btn btn-sm btn-danger">
+                    </form>
+                    {% endif %}
+                </td>
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
 
 </div>
-
-
 
 
 {% endblock content %}

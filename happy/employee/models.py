@@ -15,7 +15,7 @@ class employee_profile(models.Model):
     mothername = models.CharField(max_length=225)
     phone = models.CharField(max_length=225, blank=True, null=True)
     address = models.TextField()
-    gender = models.ForeignKey(gender, on_delete=models.CASCADE)
+    gender = models.ForeignKey(gender, on_delete=models.CASCADE, blank=True, null=True)
     dob = models.DateField()
     marital = models.CharField(max_length=225, blank=True, null=True)
     entrydate = models.DateField()
