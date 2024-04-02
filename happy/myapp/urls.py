@@ -18,6 +18,8 @@ urlpatterns = [
     path('ProductEditView/<int:pk>/', ProductEditView.as_view(), name='ProductEditView'),
     path('ProductDeleteView/<int:pk>/', ProductDeleteView.as_view(), name='ProductDeleteView'),
     path('UnitCreateView/', UnitCreateView.as_view(), name='UnitCreateView'),
+    path('UnitEditView/', UnitEditView.as_view(), name='UnitEditView'),
+    path('UnitDeleteView/', UnitDeleteView.as_view(), name='UnitDeleteView'),
     #sale
     path('mycart/', MyCartView.as_view(), name='MyCartView'),
     path('AddtoCart/', AddtoCart.as_view(), name='AddtoCart'),

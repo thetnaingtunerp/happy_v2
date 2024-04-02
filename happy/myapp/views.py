@@ -121,10 +121,27 @@ class CreateSupplier(UserRequiredMixin, View):
 
 
 class UnitCreateView(View):
+    def get(self, request):
+        u = Unit.objects.all()
+        context={'u':u}
+        return render(request, 'UnitCreateView.html', context)
     def post(self, request):
         iunit = request.POST.get('iunit')
         u = Unit(unit=iunit)
         u.save()
+        return redirect(request.META['HTTP_REFERER'])
+
+class UnitEditView(View):
+    def post(self, request):
+        uid = request.POST.get('uid')
+        uni = request.POST.get('uni')
+        upt = Unit.objects.filter(id=uid).update(unit=uni)
+        return redirect(request.META['HTTP_REFERER'])
+
+class UnitDeleteView(View):
+    def post(self, request):
+        uid = request.POST.get('rid')
+        upt = Unit.objects.filter(id=uid).delete()
         return redirect(request.META['HTTP_REFERER'])
 
 class ProductCreate(UserRequiredMixin, View):
