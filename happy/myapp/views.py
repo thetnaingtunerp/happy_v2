@@ -39,6 +39,22 @@ class SuperUserRequiredMixin(object):
             return redirect('myapp:UserLoginView')
         return super().dispatch(request, *args, **kwargs)
 
+class AdminUserLoginView(FormView):
+    template_name = 'adminlogin.html'
+    form_class = AdminLoginForm
+    success_url = reverse_lazy('myapp:DashSetupView')
+
+    def form_valid(self, form):
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data['password']
+        usr = authenticate(username=username, password=password)
+
+        if usr is not None:
+            login(self.request, usr)
+
+        else:
+            return render(self.request, self.template_name, {'form': self.form_class, 'error': 'Invalid user login!'})
+        return super().form_valid(form)
 
 
 
@@ -48,6 +64,7 @@ def test(request):
 
 class DashboardView(TemplateView):
     template_name = "dashboard.html"
+
 
 
 class UserLoginView(FormView):
