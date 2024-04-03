@@ -62,7 +62,7 @@ class AdminUserLoginView(FormView):
 def test(request):
     return render(request, 'base.html')
 
-class DashboardView(TemplateView):
+class DashboardView(UserRequiredMixin,TemplateView):
     template_name = "dashboard.html"
 
 
@@ -70,7 +70,7 @@ class DashboardView(TemplateView):
 class UserLoginView(FormView):
     template_name = 'login.html'
     form_class = ULoginForm
-    success_url = reverse_lazy('myapp:DashboardView')
+    success_url = reverse_lazy('myapp:MyCartView')
 
     def form_valid(self, form):
         username = form.cleaned_data.get('username')
@@ -191,7 +191,7 @@ class ProductCreate(UserRequiredMixin, View):
             return render(request, 'productcreate.html', context)
 
 
-class DashSetupView(UserRequiredMixin, View):
+class DashSetupView(SuperUserRequiredMixin, View):
     def get(self,request):
         category = Category.objects.all()
         item_list = Item.objects.all()

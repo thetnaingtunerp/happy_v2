@@ -1,4 +1,4 @@
-{% extends 'dbase.html' %}
+{% extends 'userbase.html' %}
 
 {% block content %}
 
@@ -249,9 +249,9 @@
             <tr class="">
                 <th class="table-plus datatable-nosort">Invoice No</th>
                 <th>Amount</th>
-                <th>Member</th>
+                <th>Supplier</th>
                 <th>Date</th>
-                <th>status</th>
+<!--                <th>status</th>-->
             </tr>
             </thead>
             <tbody>
@@ -260,15 +260,15 @@
                 <td class="table-plus">{{p.id}}</td>
                 <td><a href="#"><strong>{{p.total}}</strong></a></td>
                 {% comment %} <td><a href="{% url 'myapp:pdf_invoice_create' p.id%}"><strong>{{p.id}}</strong></a></td> {% endcomment %}
-                {% if p.member %}
-                <td>{{p.member}}</td>
+                {% if p.supplier %}
+                <td>{{p.supplier}}</td>
                 {% else %}
                 <td>-</td>
                 {% endif %}
                 <td>{{p.created_at}}</td>
-                <td>
-                    <a href="{% url 'myapp:InvoiceThermalPrintView' p.id%}" target="_blank" class="btn btn-sm btn-danger">Print</a>
-                    </td>
+<!--                <td>-->
+<!--                    <a href="{% url 'myapp:InvoiceThermalPrintView' p.id%}" target="_blank" class="btn btn-sm btn-danger">Print</a>-->
+<!--                    </td>-->
 
             </tr>
             {% endfor %}

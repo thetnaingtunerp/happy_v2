@@ -1,4 +1,4 @@
-{% extends 'dbase.html' %}
+{% extends 'userbase.html' %}
 {% load static %}
 {% block content %}
 {% if message == 1 %}
@@ -12,64 +12,64 @@
 {% endif %}
 
 
-<div class="row">
-    <!-- pos -->
-    <div class="col-md-4 col-sm-12 mb-30">
-        <div class="pd-20 card-box height-10-p">
-            
-            <a
-                href="{% url 'myapp:PurchaseView' %}"
-                class="btn-block"
-                data-toggle="#"
-                data-target="#"
-                type="button"
-            >
-                <!-- <img src="{% static 'vendors/images/salereport.jpg' %}" alt="modal" /> -->
-                <h3 class="text-blue">Create Purchase</h3>
-            </a>
-            
-        </div>
-    </div>
-    <!-- end pos -->
+<!--<div class="row">-->
+<!--    &lt;!&ndash; pos &ndash;&gt;-->
+<!--    <div class="col-md-4 col-sm-12 mb-30">-->
+<!--        <div class="pd-20 card-box height-10-p">-->
+<!--            -->
+<!--            <a-->
+<!--                href="{% url 'myapp:PurchaseView' %}"-->
+<!--                class="btn-block"-->
+<!--                data-toggle="#"-->
+<!--                data-target="#"-->
+<!--                type="button"-->
+<!--            >-->
+<!--                &lt;!&ndash; <img src="{% static 'vendors/images/salereport.jpg' %}" alt="modal" /> &ndash;&gt;-->
+<!--                <h3 class="text-blue">Create Purchase</h3>-->
+<!--            </a>-->
+<!--            -->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; end pos &ndash;&gt;-->
 
-    <!-- Purchsae -->
-    <div class="col-md-4 col-sm-12 mb-30">
-        <div class="pd-20 card-box height-10-p">
-            
-            <a
-                href="{% url 'myapp:CreateMember' %}"
-                class="btn-block"
-                data-toggle="#"
-                data-target="#"
-                type="button"
-            >
-            <h3 class="text-danger">Create Customer</h3>
-                <!-- <img src="{% static 'vendors/images/salereport.jpg' %}" alt="modal" /> -->
-            </a>
-            
-        </div>
-    </div>
-    <!-- Purchase -->
+<!--    &lt;!&ndash; Purchsae &ndash;&gt;-->
+<!--    <div class="col-md-4 col-sm-12 mb-30">-->
+<!--        <div class="pd-20 card-box height-10-p">-->
+<!--            -->
+<!--            <a-->
+<!--                href="{% url 'myapp:CreateMember' %}"-->
+<!--                class="btn-block"-->
+<!--                data-toggle="#"-->
+<!--                data-target="#"-->
+<!--                type="button"-->
+<!--            >-->
+<!--            <h3 class="text-danger">Create Customer</h3>-->
+<!--                &lt;!&ndash; <img src="{% static 'vendors/images/salereport.jpg' %}" alt="modal" /> &ndash;&gt;-->
+<!--            </a>-->
+<!--            -->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; Purchase &ndash;&gt;-->
 
-    <!-- Report -->
-    <div class="col-md-4 col-sm-12 mb-30">
-        <div class="pd-20 card-box height-10-p">
-            
-            <a
-                href="{% url 'myapp:CreateSupplier' %}"
-                class="btn-block text-center"
-                data-toggle="#"
-                data-target="#"
-                type="button"
-            >
-            <h3 class="text-blue">Create Supplier</h3>
-                <!-- <img src="{% static 'vendors/images/salereport.jpg' %}" alt="modal" /> -->
-            </a>
-            
-        </div>
-    </div>
-    <!-- Report -->
-</div>
+<!--    &lt;!&ndash; Report &ndash;&gt;-->
+<!--    <div class="col-md-4 col-sm-12 mb-30">-->
+<!--        <div class="pd-20 card-box height-10-p">-->
+<!--            -->
+<!--            <a-->
+<!--                href="{% url 'myapp:CreateSupplier' %}"-->
+<!--                class="btn-block text-center"-->
+<!--                data-toggle="#"-->
+<!--                data-target="#"-->
+<!--                type="button"-->
+<!--            >-->
+<!--            <h3 class="text-blue">Create Supplier</h3>-->
+<!--                &lt;!&ndash; <img src="{% static 'vendors/images/salereport.jpg' %}" alt="modal" /> &ndash;&gt;-->
+<!--            </a>-->
+<!--            -->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; Report &ndash;&gt;-->
+<!--</div>-->
 
 
 
