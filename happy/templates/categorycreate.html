@@ -70,9 +70,10 @@
     <div class="pb-20">
         <table class="data-table table stripe hover nowrap">
             <thead>
-            <tr class="table-warning">
-
+            <tr>
+				<th>Sr</th>
                 <th class="text-center">Category Name</th>
+				<th>Action</th>
 
 
 
@@ -80,8 +81,10 @@
             </thead>
             <tbody>
             {% for p in category %}
-            <tr class="table-info">
+            <tr>
+				<td>{{forloop.counter}}</td>
                 <td class="table-plus text-center"><b>{{p.category_name}}</b></td>
+				<td>edit</td>
             </tr>
             {% endfor %}
 

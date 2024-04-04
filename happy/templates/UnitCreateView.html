@@ -9,8 +9,8 @@
     <div class="pb-20">
         <table class="data-table table stripe hover nowrap">
             <thead>
-            <tr class="table-info">
-
+            <tr>
+                <th>Sr</th>
                 <th>Unit</th>
                 <th>Edit</th>
 
@@ -20,6 +20,7 @@
             <tbody>
             {% for p in u %}
             <tr>
+                <td>{{forloop.counter}}</td>
                 <td class="table-plus"><a href="#"><b>{{p.unit}}</b></a></td>
                 <td>
                     <!--                    <a href="#" class="btn btn-sm btn-warning">edit</a>-->
@@ -32,7 +33,7 @@
                             data-target="#bd-example-modal-lg-{{p.id}}"
                             type="button"
                     >
-                        Edit
+                        <i class="icon-copy dw dw-edit-1"></i>
 
                     </a>
                     <div
@@ -105,7 +106,7 @@
 									data-target="#Medium-modal-{{p.id}}"
 									type="button"
 								>
-									remove
+									<i class="icon-copy dw dw-trash1"></i>
 								</a>
 								<div
 									class="modal fade"
