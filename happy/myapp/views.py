@@ -497,6 +497,9 @@ class SaleInvoiceReportView(UserRequiredMixin,View):
         context ={'ord':ord}
         return render(request, 'SaleInvoiceReportView.html', context)
 
+    def post(self,request):
+        pass
+
 class ReportHome(TemplateView):
     template_name = 'ReportHome.html'
 
@@ -508,6 +511,8 @@ class PurchaseReportView(UserRequiredMixin, ListView):
         qs = super(PurchaseReportView, self).get_queryset(*args, **kwargs) 
         qs = qs.order_by("-id") 
         return qs
+
+
 
 
 ################################# Purchase #######################################
