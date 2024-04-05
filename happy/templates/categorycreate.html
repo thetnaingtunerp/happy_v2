@@ -125,7 +125,7 @@
 
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-30">
 
-                                            <div class="card-box mb-30">
+                                            <div class="card-box  mb-30">
                                                 <div class="pd-20">
                                                     <form action="{% url 'myapp:CateEditView' %}" method="post">
                                                         {% csrf_token %}
@@ -178,7 +178,7 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <form action="{% url 'myapp:CateDeleteView' %}" method="post">{% csrf_token %}
                                 <div class="modal-content">
-                                    <div class="modal-header">
+                                    <div class="modal-header bg-danger">
                                         <h4 class="modal-title" id="myLargeModalLabeld">
                                             Are You Sure To Delete ?
                                         </h4>
@@ -195,7 +195,7 @@
                                     <div class="modal-body">
                                         <div class="form-group row">
                                             <label class="col-sm-12 col-md-2 col-form-label">
-                                                 <h4 class="text-danger">{{p.category_name}}</h4> </label>
+                                                 <h4 class="">{{p.category_name}}</h4> </label>
                                             <div class="col-sm-12 col-md-10">
                                                 <input type="number" name="rid" hidden value="{{p.id}}">
                                             </div>
