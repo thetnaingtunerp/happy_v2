@@ -13,11 +13,16 @@ urlpatterns = [
     path('DashSetupView/', DashSetupView.as_view(), name='DashSetupView'),
     path('CreateMember/', CreateMember.as_view(), name='CreateMember'),
     path('CreateSupplier/', CreateSupplier.as_view(), name='CreateSupplier'),
+
     path('CategoryCreate',CategoryCreate.as_view(), name='CategoryCreate'),
+    path('CateEditView/',CateEditView.as_view(), name='CateEditView'),
+    path('CateDeleteView/',CateDeleteView.as_view(), name='CateDeleteView'),
+
     path('ProductCreate/', ProductCreate.as_view(), name='ProductCreate'),
     path('UnpackageView/<int:pk>/', UnpackageView.as_view(), name='UnpackageView'),
     path('ProductEditView/<int:pk>/', ProductEditView.as_view(), name='ProductEditView'),
     path('ProductDeleteView/<int:pk>/', ProductDeleteView.as_view(), name='ProductDeleteView'),
+
     path('UnitCreateView/', UnitCreateView.as_view(), name='UnitCreateView'),
     path('UnitEditView/', UnitEditView.as_view(), name='UnitEditView'),
     path('UnitDeleteView/', UnitDeleteView.as_view(), name='UnitDeleteView'),

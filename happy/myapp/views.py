@@ -111,6 +111,20 @@ class CategoryCreate(UserRequiredMixin, View):
             message = 'please enter category name'
             return render(request, 'categorycreate.html', {'message':message,'category':category})
 
+
+class CateEditView(View):
+    def post(self, request):
+        uid = request.POST.get('uid')
+        uni = request.POST.get('uni')
+        upt = Category.objects.filter(id=uid).update(category_name=uni)
+        return redirect(request.META['HTTP_REFERER'])
+
+class CateDeleteView(View):
+    def post(self, request):
+        uid = request.POST.get('rid')
+        upt = Category.objects.filter(id=uid).delete()
+        return redirect(request.META['HTTP_REFERER'])
+
 class CreateMember(UserRequiredMixin, View):
     def get(self, request):
         fm = MemberForm()

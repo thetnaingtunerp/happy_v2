@@ -8,73 +8,72 @@
     <div class="pd-20">
 
         <a
-									href="#"
-									class="btn btn-sm btn-outline-primary"
-									data-toggle="modal"
-									data-target="#Medium-modal"
-									type="button"
-								>
-									+ Add Category
-								</a>
-								<div
-									class="modal fade"
-									id="Medium-modal"
-									tabindex="-1"
-									role="dialog"
-									aria-labelledby="myLargeModalLabel"
-									aria-hidden="true"
-								>
-									<div class="modal-dialog modal-dialog-centered">
-                                        <form action="{% url 'myapp:CategoryCreate' %}" method="post">{% csrf_token %}
-										<div class="modal-content">
-											<div class="modal-header">
-												<h4 class="modal-title" id="myLargeModalLabel">
-													Create Category
-												</h4>
-												<button
-													type="button"
-													class="close"
-													data-dismiss="modal"
-													aria-hidden="true"
-												>
-													×
-												</button>
-											</div>
+                href="#"
+                class="btn btn-sm btn-outline-primary"
+                data-toggle="modal"
+                data-target="#Medium-modal"
+                type="button"
+        >
+            + Add Category
+        </a>
+        <div
+                class="modal fade"
+                id="Medium-modal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="myLargeModalLabel"
+                aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <form action="{% url 'myapp:CategoryCreate' %}" method="post">{% csrf_token %}
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel">
+                                Create Category
+                            </h4>
+                            <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-hidden="true"
+                            >
+                                ×
+                            </button>
+                        </div>
 
-											<div class="modal-body">
-												<div class="form-group row">
-                    <label class="col-sm-12 col-md-2 col-form-label">Category Name</label>
-                    <div class="col-sm-12 col-md-10">
-                        <input class="form-control" type="text" placeholder="" name="category_name">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Category Name</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" type="text" placeholder="" name="category_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                Save Category
+                            </button>
+                        </div>
                     </div>
-                </div>
-											</div>
-											<div class="modal-footer">
-												<button
-													type="button"
-													class="btn btn-secondary"
-													data-dismiss="modal"
-												>
-													Close
-												</button>
-												<button type="submit" class="btn btn-primary">
-													Save Category
-												</button>
-											</div>
-										</div>
-                                            </form>
-									</div>
-								</div>
+                </form>
+            </div>
+        </div>
 
     </div>
     <div class="pb-20">
         <table class="data-table table stripe hover nowrap">
             <thead>
             <tr>
-				<th>Sr</th>
+                <th>Sr</th>
                 <th class="text-center">Category Name</th>
-				<th>Action</th>
-
+                <th>Action</th>
 
 
             </tr>
@@ -82,9 +81,144 @@
             <tbody>
             {% for p in category %}
             <tr>
-				<td>{{forloop.counter}}</td>
+                <td>{{forloop.counter}}</td>
                 <td class="table-plus text-center"><b>{{p.category_name}}</b></td>
-				<td>edit</td>
+                <td>
+                    <!--					edit section -->
+                    <a
+                            href="#"
+                            class="btn btn-sm btn-outline-primary"
+                            data-toggle="modal"
+                            data-target="#bd-example-modal-lg-{{p.id}}"
+                            type="button"
+                    >
+                        <i class="icon-copy dw dw-edit-1"></i>
+
+                    </a>
+                    <div
+                            class="modal fade bs-example-modal-lg"
+                            id="bd-example-modal-lg-{{p.id}}"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="myLargeModalLabel"
+                            aria-hidden="true"
+                    >
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myLargeModalLabel">
+                                        Category Editting
+                                    </h4>
+                                    <button
+                                            type="button"
+                                            class="close"
+                                            data-dismiss="modal"
+                                            aria-hidden="true"
+                                    >
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+
+                                    <div class="row">
+
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-30">
+
+                                            <div class="card-box mb-30">
+                                                <div class="pd-20">
+                                                    <form action="{% url 'myapp:CateEditView' %}" method="post">
+                                                        {% csrf_token %}
+                                                        <div class="form-group">
+                                                            <label>Category</label>
+                                                            <input
+                                                                    class="form-control form-control-lg"
+                                                                    type="text"
+                                                                    name="uni"
+                                                                    value="{{p.category_name}}"
+                                                            />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="number" name="uid" value="{{p.id}}" hidden>
+                                                            <input type="submit" value="Update Cateogry"
+                                                                   class="btn btn-primary btn-block">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--					end edit section -->
+                    <!--					start delete section -->
+                    <a
+                            href="#"
+                            class="btn btn-sm btn-outline-danger"
+                            data-toggle="modal"
+                            data-target="#Medium-modal-{{p.id}}"
+                            type="button"
+                    >
+                        <i class="icon-copy dw dw-trash1"></i>
+                    </a>
+                    <div
+                            class="modal fade"
+                            id="Medium-modal-{{p.id}}"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="myLargeModalLabeld"
+                            aria-hidden="true"
+                    >
+                        <div class="modal-dialog modal-dialog-centered">
+                            <form action="{% url 'myapp:CateDeleteView' %}" method="post">{% csrf_token %}
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myLargeModalLabeld">
+                                            Are You Sure To Delete ?
+                                        </h4>
+                                        <button
+                                                type="button"
+                                                class="close"
+                                                data-dismiss="modal"
+                                                aria-hidden="true"
+                                        >
+                                            ×
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="form-group row">
+                                            <label class="col-sm-12 col-md-2 col-form-label">
+                                                 <h4 class="text-danger">{{p.category_name}}</h4> </label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <input type="number" name="rid" hidden value="{{p.id}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button
+                                                type="button"
+                                                class="btn btn-secondary"
+                                                data-dismiss="modal"
+                                        >
+                                            Close
+                                        </button>
+                                        <button type="submit" class="btn btn-danger">
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--					end delete section -->
+                </td>
             </tr>
             {% endfor %}
 
