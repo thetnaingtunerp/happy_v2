@@ -4,17 +4,33 @@
 {% block content %}
 
 <div class="card-box mb-30">
-    <div class="pb-20">
+    <div class="pb-20 pt-20 pl-20">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <label>From Date</label>
+                <input type="date" name="fd" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <label>To Date</label>
+                <input type="date" name="fd" class="form-control">
+            </div>
 
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 pt-20">
+                <input type="submit" value="Filter" class="btn btn-outline-info btn-block">
+            </div>
+        </div>
     </div>
 </div>
-
 
 
 {% for ord_obj in ord %}
 <div class="card-box mb-30">
     <div class="pb-20">
-        <div>Invoice- {{ord_obj.id}} | Date - {{ord_obj.created}}</div>
+        <div class="pl-30 pt-30 pb-20">Invoice- <strong>{{ord_obj.id}}</strong> | Date - <strong>{{ord_obj.created}}</strong></div>
         <table class="table stripe hover nowrap">
             <thead>
             <tr>
@@ -22,14 +38,14 @@
                 <th>Item Name</th>
 
                 <th>Rate</th>
-                <th  class="text-right">Quantity</th>
+                <th class="text-right">Quantity</th>
                 <th>Unit</th>
                 <th>Subtotal</th>
-               
+
             </tr>
             </thead>
             <tbody>
-                {% for p in ord_obj.cart.cartproduct_set.all %}
+            {% for p in ord_obj.cart.cartproduct_set.all %}
             <tr>
                 <td>{{forloop.counter}}</td>
                 <td>
@@ -42,7 +58,7 @@
                 <td class="text-right">{{p.quantity}}</td>
                 <td>{{p.product.iunit}}</td>
                 <td>{{p.subtotal}}</td>
-                
+
 
             </tr>
             {% endfor %}
@@ -65,7 +81,6 @@
                 {% endif %}
 
             </tr>
-
 
 
             </tbody>
