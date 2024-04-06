@@ -498,7 +498,11 @@ class SaleInvoiceReportView(UserRequiredMixin,View):
         return render(request, 'SaleInvoiceReportView.html', context)
 
     def post(self,request):
-        pass
+        fdate = request.POST.get('fdate')
+        tdate = request.POST.get('tdate')
+        ord = Order.objects.filter(created_at__range=[fdate, tdate])
+        context = {'ord': ord}
+        return render(request, 'SaleInvoiceReportView.html', context)
 
 class ReportHome(TemplateView):
     template_name = 'ReportHome.html'

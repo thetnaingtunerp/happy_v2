@@ -4,28 +4,97 @@
 {% block content %}
 
 <div class="card-box mb-30">
-    <div class="pb-20 pt-20 pl-20">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
-                <label>From Date</label>
-                <input type="date" name="fd" class="form-control">
-            </div>
-            <div class="col-md-4">
-                <label>To Date</label>
-                <input type="date" name="fd" class="form-control">
-            </div>
+    <div class="pt-20 pb-20">
+        <div class="pl-20">
+            <!--					date filter section -->
+                    <a
+                            href="#"
+                            class="btn btn-sm btn-outline-primary"
+                            data-toggle="modal"
+                            data-target="#bd-example-modal-lg-{{p.id}}"
+                            type="button"
+                    >
+                        <i class="icon-copy dw dw-filter"></i> <span>Filter by Date</span>
 
-        </div>
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8 pt-20">
-                <input type="submit" value="Filter" class="btn btn-outline-info btn-block">
-            </div>
+                    </a>
+                    <div
+                            class="modal fade bs-example-modal-lg"
+                            id="bd-example-modal-lg-{{p.id}}"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="myLargeModalLabel"
+                            aria-hidden="true"
+                    >
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myLargeModalLabel">
+                                        Filter by Date Between
+                                    </h4>
+                                    <button
+                                            type="button"
+                                            class="close"
+                                            data-dismiss="modal"
+                                            aria-hidden="true"
+                                    >
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+
+                                    <div class="row">
+
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-30">
+
+                                            <div class="card-box  mb-30">
+                                                <div class="pd-20">
+                                                    <form action="{% url 'myapp:SaleInvoiceReportView' %}" method="post">
+                                                        {% csrf_token %}
+                                                        <div class="form-group">
+                                                            <label>From Date</label>
+                                                            <input
+                                                                    class="form-control form-control-lg"
+                                                                    type="date"
+                                                                    name="fdate"
+                                                                    required
+
+                                                            />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>To Date</label>
+                                                            <input
+                                                                    class="form-control form-control-lg"
+                                                                    type="date"
+                                                                    name="tdate"
+                                                                    required
+
+                                                            />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="submit" value="Filter by Date"
+                                                                   class="btn btn-primary btn-block">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--					end date filter section -->
+
+
+
         </div>
     </div>
 </div>
-
 
 {% for ord_obj in ord %}
 <div class="card-box mb-30">
