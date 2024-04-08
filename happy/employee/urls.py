@@ -8,4 +8,7 @@ urlpatterns = [
     path('DailyAttendance/', DailyAttendance.as_view(), name='DailyAttendance'),
     path('EmpCheckout/', EmpCheckout.as_view(), name='EmpCheckout'),
     path('AttendanceReport/', AttendanceReport.as_view(), name='AttendanceReport'),
+
+    path('EmployeeProfileUpdate/', EmployeeProfileUpdate.as_view(), name='EmployeeProfileUpdate'),
+    path('EmpDeleteView/', EmpDeleteView.as_view(), name='EmpDeleteView'),
 ]

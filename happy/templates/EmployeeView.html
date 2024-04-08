@@ -338,13 +338,14 @@
                                                             >
                                                                 <div class="pd-20">
                                                                     <div class="profile-setting">
-                                                                        <form action="" method="post">{% csrf_token %}
+                                                                        <form action="{% url 'employee:EmployeeProfileUpdate' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
                                                                             <ul class="profile-edit-list row">
                                                                                 <li class="weight-500 col-md-6">
                                                                                     {% comment %} <h4
                                                                                         class="text-blue h5 mb-20">
                                                                                     Edit Your Personal Setting
                                                                                 </h4> {% endcomment %}
+
                                                                                     <div class="form-group">
                                                                                         <label class="text-primary">Full Name</label>
                                                                                         <input
@@ -376,6 +377,11 @@
                                                                                                 type="email"
                                                                                                 value="{{p.mothername}}"
                                                                                         />
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label class="text-primary">Change Profile Picture</label>
+                                                                                        <input type="file" name="cphoto"
+                                                                                               >
                                                                                     </div>
                                                                                     
 
@@ -415,22 +421,7 @@
 <!--                                                                                        </div>-->
 <!--                                                                                    </div>-->
 
-                                                                                    {% comment %} <div class="form-group">
-                                                                                        <div
-                                                                                                class="custom-control custom-checkbox mb-5"
-                                                                                        >
-                                                                                            <input
-                                                                                                    type="checkbox"
-                                                                                                    class="custom-control-input"
-                                                                                                    id="customCheck1-1"
-                                                                                            />
-                                                                                            <label
-                                                                                                    class="custom-control-label weight-400"
-                                                                                                    for="customCheck1-1"
-                                                                                            >Active</label
-                                                                                            >
-                                                                                        </div>
-                                                                                    </div> {% endcomment %}
+
 
                                                                                 </li>
                                                                                 <li class="weight-500 col-md-6">
@@ -509,7 +500,68 @@
                             </div>
                         </div>
                     </div>
+<!--					start delete section -->
+                    <a
+                            href="#"
+                            class="btn btn-sm btn-outline-danger"
+                            data-toggle="modal"
+                            data-target="#Medium-modal-{{p.id}}"
+                            type="button"
+                    >
+                        <i class="icon-copy dw dw-trash1"></i>
 
+                    </a>
+                    <div
+                            class="modal fade"
+                            id="Medium-modal-{{p.id}}"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="myLargeModalLabeld"
+                            aria-hidden="true"
+                    >
+                        <div class="modal-dialog modal-dialog-centered">
+                            <form action="{% url 'employee:EmpDeleteView' %}" method="post">{% csrf_token %}
+                                <div class="modal-content">
+                                    <div class="modal-header bg-danger">
+                                        <h4 class="modal-title" id="myLargeModalLabeld">
+                                            Are You Sure To Delete ?
+                                        </h4>
+                                        <button
+                                                type="button"
+                                                class="close"
+                                                data-dismiss="modal"
+                                                aria-hidden="true"
+                                        >
+                                            ×
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="form-group row">
+                                            <label class="col-sm-12 col-md-2 col-form-label">
+                                                 <h4 class="">{{p.id}}</h4> </label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <input type="number" name="rid" hidden value="{{p.id}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button
+                                                type="button"
+                                                class="btn btn-secondary"
+                                                data-dismiss="modal"
+                                        >
+                                            Close
+                                        </button>
+                                        <button type="submit" class="btn btn-danger">
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--					end delete section -->
 
                     <!-- Large modal -->
                 </td>

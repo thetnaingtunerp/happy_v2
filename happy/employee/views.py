@@ -64,6 +64,17 @@ class EmpEditView(SuperUserRequiredMixin, View):
             fm.save()
         return redirect('employee:EmployeeView')
 
+
+class EmployeeProfileUpdate(View):
+    def post(self, request):
+        return redirect('employee:EmployeeView')
+
+class EmpDeleteView(View):
+    def post(self, request):
+        uid = request.POST.get('rid')
+        upt = employee_profile.objects.filter(id=uid).delete()
+        return redirect(request.META['HTTP_REFERER'])
+
 class DailyAttendance(SuperUserRequiredMixin, View):
     def get(self, request):
         ep = employee_profile.objects.all()
