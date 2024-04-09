@@ -67,6 +67,21 @@ class EmpEditView(SuperUserRequiredMixin, View):
 
 class EmployeeProfileUpdate(View):
     def post(self, request):
+        employee_name = request.POST.get('employee_name')
+        nrc_no = request.POST.get('nrc_no')
+        fathername = request.POST.get('fathername')
+        mothername = request.POST.get('mothername')
+        phone = request.POST.get('phone')
+        # address = request.POST.get('address')
+        dob = request.POST.get('dob')
+        entrydate = request.POST.get('entrydate')
+        salary = request.POST.get('salary')
+        # photo = request.FILES['photo']
+        eid = request.POST.get('eid')
+        pi = employee_profile.objects.filter(id=eid)
+        pi.update(employee_name=employee_name, nrc_no=nrc_no, fathername=fathername, mothername=mothername,
+                  phone=phone, dob=dob, entrydate=entrydate, salary=salary)
+
         return redirect('employee:EmployeeView')
 
 class EmpDeleteView(View):

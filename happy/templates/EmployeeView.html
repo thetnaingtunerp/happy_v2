@@ -181,7 +181,9 @@
                     <img src="{{p.photo.url}}" width="50px">
 
                 </td>
-                <td>{{p.employee_name}}</td>
+                <td>
+                    <a href="{% url 'employee:EmpEditView' p.id %}">{{p.employee_name}}</a>
+                    </td>
                 <td>{{p.nrc_no}}</td>
                 <td>{{p.fathername}}</td>
                 <td>{{p.mothername}}</td>
@@ -198,12 +200,12 @@
 
                     <a
                             href="#"
-                            class="btn btn-sm btn-info"
+                            class="btn btn-sm btn-primary"
                             data-toggle="modal"
                             data-target="#bd-example-modal-lg-{{p.id}}"
                             type="button"
                     >
-                        Edit
+                        <i class="icon-copy dw dw-edit-1"></i>
                         <!-- <img src="vendors/images/modal-img1.jpg" alt="modal" /> -->
                     </a>
                     <div
@@ -236,6 +238,13 @@
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
                                             <div class="pd-20 card-box height-100-p">
                                                 <div class="profile-photo">
+                                                    <a
+										href="modal"
+										data-toggle="modal"
+										data-target="#modal"
+										class="edit-avatar"
+										><i class="fa fa-pencil"></i
+									></a>
 
                                                     <img
                                                             src="{{p.photo.url}}"
@@ -256,13 +265,18 @@
                                                         >
                                                             <div class="modal-content">
                                                                 <div class="modal-body pd-5">
-                                                                    <div class="img-container">
-                                                                        <img
-                                                                                id="image"
-                                                                                src="{{p.photo.url}}"
-                                                                                alt="Picture"
-                                                                        />
-                                                                    </div>
+                                                                    <div class="pd-20 card-box mb-30">
+						<div class="clearfix mb-20">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Upload New Photo</h4>
+							</div>
+						</div>
+						<form class="dropzone" action="#" id="my-awesome-dropzone">
+							<div class="fallback">
+								<input type="file" name="file" />
+							</div>
+						</form>
+					</div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <input
@@ -338,10 +352,10 @@
                                                             >
                                                                 <div class="pd-20">
                                                                     <div class="profile-setting">
-                                                                        <form action="{% url 'employee:EmployeeProfileUpdate' %}"
-                                                                              method="post"
-                                                                              enctype="multipart/form-data">
-                                                                            {% csrf_token %}
+<!--                                                                        <form action="{% url 'employee:EmployeeProfileUpdate' %}"-->
+<!--                                                                              method="post"-->
+<!--                                                                              enctype="multipart/form-data">-->
+<!--                                                                            {% csrf_token %}-->
                                                                             <ul class="profile-edit-list row">
                                                                                 <li class="weight-500 col-md-6">
 
@@ -353,6 +367,7 @@
                                                                                                 class="form-control form-control-lg"
                                                                                                 type="text"
                                                                                                 value="{{p.employee_name}}"
+                                                                                                name="employee_name"
                                                                                         />
                                                                                     </div>
                                                                                     <div class="form-group">
@@ -362,6 +377,7 @@
                                                                                                 class="form-control form-control-lg"
                                                                                                 type="text"
                                                                                                 value="{{p.nrc_no}}"
+                                                                                                name="nrc_no"
                                                                                         />
                                                                                     </div>
                                                                                     <div class="form-group">
@@ -369,8 +385,9 @@
                                                                                             Name</label>
                                                                                         <input
                                                                                                 class="form-control form-control-lg"
-                                                                                                type="email"
+                                                                                                type="text"
                                                                                                 value="{{p.fathername}}"
+                                                                                                name="fathername"
                                                                                         />
                                                                                     </div>
                                                                                     <div class="form-group">
@@ -378,16 +395,12 @@
                                                                                             Name</label>
                                                                                         <input
                                                                                                 class="form-control form-control-lg"
-                                                                                                type="email"
+                                                                                                type="text"
                                                                                                 value="{{p.mothername}}"
+                                                                                                name="mothername"
                                                                                         />
                                                                                     </div>
-                                                                                    <div class="form-group">
-                                                                                        <label class="text-primary">Change
-                                                                                            Profile Picture</label>
-                                                                                        <input type="file" name="cphoto"
-                                                                                        >
-                                                                                    </div>
+
 
                                                                                 </li>
                                                                                 <li class="weight-500 col-md-6">
@@ -396,9 +409,10 @@
                                                                                         <label class="text-primary">Date
                                                                                             of birth</label>
                                                                                         <input
-                                                                                                class="form-control form-control-lg date-picker"
+                                                                                                class="form-control form-control-lg"
                                                                                                 type="text"
                                                                                                 value="{{p.dob}}"
+                                                                                                name="dob"
                                                                                         />
                                                                                     </div>
 
@@ -406,9 +420,10 @@
                                                                                         <label class="text-primary">Entry
                                                                                             Date</label>
                                                                                         <input
-                                                                                                class="form-control form-control-lg date-picker"
+                                                                                                class="form-control form-control-lg"
                                                                                                 type="text"
                                                                                                 value="{{p.entrydate}}"
+                                                                                                name="entrydate"
                                                                                         />
                                                                                     </div>
                                                                                     <div class="form-group">
@@ -418,6 +433,7 @@
                                                                                                 class="form-control form-control-lg"
                                                                                                 type="number"
                                                                                                 value="{{p.phone}}"
+                                                                                                name="phone"
                                                                                         />
                                                                                     </div>
                                                                                     <div class="form-group">
@@ -426,8 +442,10 @@
                                                                                                 class="form-control form-control-lg"
                                                                                                 type="salary"
                                                                                                 value="{{p.salary}}"
+                                                                                                name="salary"
                                                                                         />
                                                                                     </div>
+
 
 
                                                                                 </li>
@@ -450,20 +468,21 @@
 
 
                                 </div>
-                                <div class="modal-footer">
-                                    <button
-                                            type="button"
-                                            class="btn btn-secondary"
-                                            data-dismiss="modal"
-                                    >
-                                        Close
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">
-                                        Save changes
-                                    </button>
+<!--                                <div class="modal-footer">-->
+<!--                                    <button-->
+<!--                                            type="button"-->
+<!--                                            class="btn btn-secondary"-->
+<!--                                            data-dismiss="modal"-->
+<!--                                    >-->
+<!--                                        Close-->
+<!--                                    </button>-->
+<!--                                    <input type="number" value="{{p.id}}" hidden name="eid">-->
+<!--                                    <button type="submit" class="btn btn-primary">-->
+<!--                                        Save changes-->
+<!--                                    </button>-->
 
-                                </div>
-                                </form>
+<!--                                </div>-->
+<!--                                </form>-->
                             </div>
                         </div>
                     </div>
@@ -529,6 +548,7 @@
                         </div>
                     </div>
                     <!--					end delete section -->
+                    <a href="{% url 'employee:EmpEditView' p.id %}" class="btn btn-sm btn-info"><i class="icon-copy dw dw-edit-1"></i></a>
 
                     <!-- Large modal -->
                 </td>
