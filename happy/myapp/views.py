@@ -243,7 +243,7 @@ class ProductEditView(UserRequiredMixin,View):
 
     def post(self, request, pk):
         pi = Item.objects.get(id=pk)
-        fm = AdminProductEditForm(request.POST,instance=pi)
+        fm = AdminProductEditForm(request.POST,request.FILES,instance=pi)
         if fm.is_valid():
             fm.save()
         return redirect('myapp:DashSetupView')
