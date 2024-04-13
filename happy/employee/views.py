@@ -59,7 +59,7 @@ class EmpEditView(SuperUserRequiredMixin, View):
 
     def post(self, request, pk):
         pi = employee_profile.objects.get(id=pk)
-        fm = EmployeeForm(request.POST,instance=pi)
+        fm = EmployeeForm(request.POST, request.FILES,instance=pi)
         if fm.is_valid():
             fm.save()
         return redirect('employee:EmployeeView')
