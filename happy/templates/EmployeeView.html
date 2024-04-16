@@ -200,12 +200,13 @@
 
                     <a
                             href="#"
-                            class="btn btn-sm btn-primary"
+                            class="btn btn-sm btn-outline-success"
                             data-toggle="modal"
                             data-target="#bd-example-modal-lg-{{p.id}}"
                             type="button"
                     >
-                        <i class="icon-copy dw dw-edit-1"></i>
+
+                        <i class="icon-copy bi bi-eye-fill"></i>
                         <!-- <img src="vendors/images/modal-img1.jpg" alt="modal" /> -->
                     </a>
                     <div
@@ -238,13 +239,13 @@
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
                                             <div class="pd-20 card-box height-100-p">
                                                 <div class="profile-photo">
-                                                    <a
-										href="modal"
-										data-toggle="modal"
-										data-target="#modal"
-										class="edit-avatar"
-										><i class="fa fa-pencil"></i
-									></a>
+<!--                                                    <a-->
+<!--										href="modal"-->
+<!--										data-toggle="modal"-->
+<!--										data-target="#modal"-->
+<!--										class="edit-avatar"-->
+<!--										><i class="fa fa-pencil"></i-->
+<!--									></a>-->
 
                                                     <img
                                                             src="{{p.photo.url}}"
@@ -265,18 +266,7 @@
                                                         >
                                                             <div class="modal-content">
                                                                 <div class="modal-body pd-5">
-                                                                    <div class="pd-20 card-box mb-30">
-						<div class="clearfix mb-20">
-							<div class="pull-left">
-								<h4 class="text-blue h4">Upload New Photo</h4>
-							</div>
-						</div>
-						<form class="dropzone" action="#" id="my-awesome-dropzone">
-							<div class="fallback">
-								<input type="file" name="file" />
-							</div>
-						</form>
-					</div>
+
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <input
