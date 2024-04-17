@@ -27,15 +27,17 @@ table {
 
 td.description,
 th.description {
-    width: 300px;
-    max-width: 300px;
+    width: 350px;
+    max-width: 350px;
     text-align: center;
     align-content: center;
+    font-size : 16px;
 }
 td.sn,
 th.sn {
     width: 40px;
     max-width: 40px;
+    text-align : right;
 }
 
 td.quantity,
@@ -59,6 +61,7 @@ th.unit {
     width: 50px;
     max-width: 50px;
     word-break: break-all;
+    text-align: center;
 }
 
 td.subtotal,
@@ -78,6 +81,19 @@ th.subtotal {
 
 .headtitle{
     font-size: 20px;
+}
+
+.oid
+{
+font-size:20px;
+font-weight : bold;
+}
+
+.odate
+{
+font-size:20px;
+margin-left : 480px;
+font-weight : bold;
 }
 
 .ticket {
@@ -106,15 +122,19 @@ img {
 
             
             <img src="{% static 'src/images/inv.png' %}" alt="inv_img" >
-            Invoice- {{ord_obj.id}}
+
+            <span class="oid">Invoice : {{ord_obj.id}}</span>
+            <span class="odate">Date -{{ord_obj.created_at}}</span>
+
+
             <br>
-            Date -{{ord_obj.created_at}}
-            <br>
-            Name - {{ord_obj.ordered_by}}-{{ord_obj.mobile}}
+            <span class="oid">
+            Name - {{ord_obj.ordered_by}}[{{ord_obj.mobile}}]
+                </span>
             <hr>
             <table>
                 <thead>
-                    <tr style="background-color:yellowgreen;">
+                    <tr style="background-color:skyblue;">
                         <th class="sn">SN</th>
                         <th class="description">ItemName</th>
                         <th class="price">Price</th>
@@ -138,8 +158,8 @@ img {
                     </tr>
                 {% endfor %}
                     <tr>
-                        <td class="sn"></td>
-                        <td colspan="4" style="text-align: right;"><strong>TOTAL </strong></td>
+<!--                        <td class="sn"></td>-->
+                        <td colspan="5" style="text-align: right;"><strong>TOTAL </strong></td>
                         <td class="subtotal">{{ord_obj.total}}</td>
                     </tr>
                     <!-- <tr>
@@ -150,9 +170,7 @@ img {
                     
                 </tbody>
             </table>
-           
-            <p class="centered">ဝယ်ယူအားပေးမှု အတွက် အထူး ကျေးဇူးတင်ပါသည်
-                <br></p>
+
         </div>
         <button id="btnPrint" class="hidden-print">Print</button>
 <!--        <script src="script.js"></script>-->

@@ -4,7 +4,7 @@ from . import views
 app_name = 'myapp'
 urlpatterns = [
     path('test/',views.test, name='test'),
-    path('', DashboardView.as_view(), name='DashboardView'),
+    path('dashboard/', DashboardView.as_view(), name='DashboardView'),
     path('login/', UserLoginView.as_view(), name = 'UserLoginView'),
     path('logout/', UserLogoutView.as_view(), name='UserLogoutView'),
     path('AdminUserLoginView/', AdminUserLoginView.as_view(), name='AdminUserLoginView'),
@@ -27,7 +27,7 @@ urlpatterns = [
     path('UnitEditView/', UnitEditView.as_view(), name='UnitEditView'),
     path('UnitDeleteView/', UnitDeleteView.as_view(), name='UnitDeleteView'),
     #sale
-    path('mycart/', MyCartView.as_view(), name='MyCartView'),
+    path('', MyCartView.as_view(), name='MyCartView'),
     path('AddtoCart/', AddtoCart.as_view(), name='AddtoCart'),
     path('manage/<int:cp_id>/', ManageCartView.as_view(), name='ManageCartView'),
     path('checkout/', CheckoutView.as_view(), name='CheckoutView'),
