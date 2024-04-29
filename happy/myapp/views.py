@@ -60,7 +60,7 @@ class AdminUserLoginView(FormView):
 
 # Create your views here.
 def test(request):
-    return render(request, 'base.html')
+    return render(request, 'v3/saleview.html')
 
 class DashboardView(UserRequiredMixin,TemplateView):
     template_name = "dashboard.html"
