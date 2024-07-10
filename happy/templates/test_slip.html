@@ -1,110 +1,22 @@
-
-{% load static %}
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<!--        <link rel="stylesheet" href="style.css">-->
-        <title>{{ord_obj.id}}</title>
-      <style>
-        * {
-    font-size: 12px;
-    font-family: 'Times New Roman';
-}
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-td,
-th,
-tr,
-table {
-    border: 2px solid black;
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    border-collapse: collapse;
-    height: 50px;
-}
-
-td.description,
-th.description {
-    width: 350px;
-    max-width: 350px;
-    text-align: center;
-    align-content: center;
-    font-size : 16px;
-}
-td.sn,
-th.sn {
-    width: 40px;
-    max-width: 40px;
-    text-align : right;
-}
-
-td.quantity,
-th.quantity {
-    width: 100px;
-    max-width: 100px;
-    word-break: break-all;
-    text-align: center;
-}
-
-td.price,
-th.price {
-    width: 100px;
-    max-width: 100px;
-    word-break: break-all;
-    text-align: right;
-}
-
-td.unit,
-th.unit {
-    width: 50px;
-    max-width: 50px;
-    word-break: break-all;
-    text-align: center;
-}
-
-td.subtotal,
-th.subtotal {
-    width: 100px;
-    max-width: 100px;
-    word-break: break-all;
-    text-align: right;
-}
-
-
-.centered {
-    text-align: center;
-    align-content: center;
-}
-
-
-.headtitle{
-    font-size: 20px;
-}
-
-.oid
-{
-font-size:20px;
-font-weight : bold;
-}
-
-.odate
-{
-font-size:20px;
-margin-left : 480px;
-font-weight : bold;
-}
-
-.ticket {
-    width: 786px;
-    max-width: 768px;
-}
-
-img {
-    max-width: inherit;
-    width: inherit;
-}
+    <title>Hello, world!</title>
+    <style>
+        
+/* #btnPrint{
+    background-color: rgb(236, 14, 14);
+    padding:15px 30px;
+    border-radius: 25%;
+    color:aliceblue;
+} */
 
 @media print {
     .hidden-print,
@@ -112,73 +24,96 @@ img {
         display: none !important;
     }
 }
-      </style>
+    </style>
+  </head>
+  <body>
+    <div class="d-flex justify-content-center">
+        <h1>Company Name</h1>
+    </div>
 
-    </head>
-    <body>
-        <div class="ticket">
+    <div class="d-flex justify-content-center">
+        <h4>Company Heading Heading HeadingHeading Heading Heading</h4>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <h5>Address Address Address v Address Address Address vAddress</h5>
+    </div>
+    <div class="d-flex justify-content-center">
+        <h5>Address Address Address v Address Address Address vAddress</h5>
+    </div>
+    
+
+
+
+
+
+    <table class="table table-striped">
+        <thead>
+          
+          <tr>
+            <th scope="col" class="srno">NO </th>
+            <th scope="col" class="itmname">ITEMS DESCRIPTION </th>
             
-           
-
+            <th scope="col" class="hrate">RATE </th>
+            <th scope="col" class="hqty">QTY </th>
+            <th scope="col" class="amt">UNIT </th>
+            <th scope="col" class="amt">AMOUNT</th>
             
-            <img src="{% static 'src/images/inv.png' %}" alt="inv_img" >
+          </tr>
+        </thead>
+        <tbody>
+            {% for p in ord_obj.cart.cartproduct_set.all %}
+            <tr>
+                <td class="sn">{{forloop.counter}}</td>
+                <td class="description">{{p.product.itemname}}</td>
+                <td class="price">{{p.rate}}</td>
+                <td class="quantity">{{p.quantity}}</td>
+                <td class="unit">{{p.product.iunit}}</td>
+                <td class="subtotal">{{p.subtotal}}</td>
+                
 
-            <span class="oid">Invoice : {{ord_obj.id}}</span>
-            <span class="odate">Date -{{ord_obj.created_at}}</span>
+            </tr>
+        {% endfor %}
+      
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total</td>
+            <td><strong>{{ord_obj.total}}</strong></td>
+            
+          </tr>
+      
+          
+          
+        </tbody>
+      </table>
 
 
-            <br>
-            <span class="oid">
-            Name - {{ord_obj.ordered_by}}[{{ord_obj.mobile}}]
-                </span>
-            <hr>
-            <table>
-                <thead>
-                    <tr style="background-color:skyblue;">
-                        <th class="sn">SN</th>
-                        <th class="description">ItemName</th>
-                        <th class="price">Price</th>
-                        <th class="quantity">Qty</th>
-                        <th class="unit">Unit</th>
-                        <th class="subtotal">Amount</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                {% for p in ord_obj.cart.cartproduct_set.all %}
-                    <tr>
-                        <td class="sn">{{forloop.counter}}</td>
-                        <td class="description">{{p.product.itemname}}</td>
-                        <td class="price">{{p.rate}}</td>
-                        <td class="quantity">{{p.quantity}}</td>
-                        <td class="unit">{{p.product.iunit}}</td>
-                        <td class="subtotal">{{p.subtotal}}</td>
-                        
+      <button id="btnPrint" class="hidden-print btn btn-primary btn-block">Print</button>
+      
 
-                    </tr>
-                {% endfor %}
-                    <tr>
-<!--                        <td class="sn"></td>-->
-                        <td colspan="5" style="text-align: right;"><strong>TOTAL </strong></td>
-                        <td class="subtotal">{{ord_obj.total}}</td>
-                    </tr>
-                    <!-- <tr>
-                        <td class="quantity"></td>
-                        <td class="description">Discount</td>
-                        <td class="price">{{ord_obj.discount}}</td>
-                    </tr> -->
-                    
-                </tbody>
-            </table>
 
-        </div>
-        <button id="btnPrint" class="hidden-print">Print</button>
-<!--        <script src="script.js"></script>-->
-    </body>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    
     <script>
-      const $btnPrint = document.querySelector("#btnPrint");
-      $btnPrint.addEventListener("click", () => {
-      window.print();
-});
-    </script>
+        const $btnPrint = document.querySelector("#btnPrint");
+        $btnPrint.addEventListener("click", () => {
+        window.print();
+  });
+      </script>
+
+
+  </body>
 </html>

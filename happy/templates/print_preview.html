@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style>
+     * {
+    font-size: 12px;
+    font-family: 'Times New Roman';
+}
+
+td,
+th,
+tr,
+.table {
+    border: 1px solid black;
+
+    border-collapse: collapse;
+    height: 50px;
+}
+
+
+
+
+
+
+    .cusName{
+      color: red;
+      font-size: 20px;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+    .dte{
+      color: red;
+      font-size: 20px;
+      font-weight: bold;
+      margin-left: 500px;
+    }
+
+.srno{
+  width: 50px;
+  max-width: 50px;
+  text-align: center;
+  font-size: 22px;
+}
+
+
+.itmname, .titm{
+   width: 800px;
+    max-width: 800px;
+    text-align: center;
+    align-content: center;
+    font-size : 22px;
+    font-weight: bold;
+}
+
+.hqty, .tqty{
+  width: 80px;
+    max-width: 80px;
+    text-align: center;
+    align-content: center;
+    font-size : 18px;
+}
+
+.hrate, .trate{
+  width: 150px;
+    max-width: 150px;
+    text-align: center;
+    align-content: center;
+    font-size : 18px;
+}
+
+.amt, .tamt{
+   width: 200px;
+    max-width: 200px;
+    text-align: center;
+    align-content: center;
+    font-size : 18px;
+}
+
+.ihd{
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+/*  background: red;*/
+  align-items: center;
+  text-align: center;
+/*  flex-wrap: wrap;*/
+}
+
+
+
+
+
+
+@media (max-width: 1366px) {
+
+.pl{
+  padding: 0px 700px 0px 0px;
+/*  background: blue;*/
+font-size: 20px;
+font-weight: bold;
+}
+.pr{
+  padding: 0px 0px 0px 200px;
+  font-size: 20px;
+font-weight: bold;
+/*  background: red;*/
+}  
+
+}
+
+@media (max-width: 794px) {
+
+.pl{
+  padding: 0px 200px 0px 0px;
+ font-size: 20px;
+font-weight: bold;
+/*  background: blue;*/
+}
+.pr{
+  padding: 0px 0px 0px 200px;
+  font-size: 20px;
+font-weight: bold;
+/*  background: red;*/
+}  
+
+}
+
+@media (max-width: 550px) {
+
+.pl{
+  padding: 0px 100px 0px 0px;
+  font-size: 14px;
+font-weight: bold;
+/*  background: blue;*/
+}
+.pr{
+  padding: 0px 0px 0px 80px;
+  font-size: 14px;
+font-weight: bold;
+/*  background: yellow;*/
+}  
+
+}
+
+  </style>
+</head>
+<body>
+
+
+
+
+
+<!-- {{data.id}} -->
+
+<img src="{{p.photo.url}}" width="100%" class="invp">
+
+
+<div class="ihd">
+  <div class="pl">Customer : {{data.customer}}</div>
+  <div class="pr">Date : {{data.created_at}}</div>
+</div>
+
+
+<div>
+  
+<table class="table table-striped">
+  <thead>
+    
+    <tr>
+      <th scope="col" class="srno">စဉ် </th>
+      <th scope="col" class="itmname">အမျိုးအမည် </th>
+      <th scope="col" class="hqty">ဦးရေ </th>
+      <th scope="col" class="hrate">နှုန်း  </th>
+      <th scope="col" class="amt">ကျပ် </th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in invitm %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td class="titm">{{i.item}}</td>
+      <td class="tqty">{{i.qty}}</td>
+      <td class="trate">{{i.rate}}</td>
+      <td class="tamt">
+        {{i.amount}}
+      </td>
+      
+    </tr>
+    {% endfor %}
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Total</td>
+      <td class="text-right"><strong>{{data.total}}</strong></td>
+      
+    </tr>
+
+    <tr>
+      <td></td>
+      
+      <td colspan="3">
+        
+      </td>
+      <td></td>
+      
+
+    </tr>
+    
+  </tbody>
+</table>
+
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
+
+<!-- ===================================================== -->
+ 
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!--        <link rel="stylesheet" href="style.css">-->
+        <title>{{ord_obj.id}}</title>
+      <style>
+        * {
+    font-size: 12px;
+    font-family: 'Times New Roman';
+}
+
+td,
+th,
+tr,
+table {
+    border: 1px solid rgb(99, 98, 98);
+
+    border-collapse: collapse;
+    height: 40px;
+}
+
+td.description,
+th.description {
+    width: 350px;
+    max-width: 350px;
+    text-align: center;
+    align-content: center;
+    font-size : 18px;
+}
+td.sn,
+th.sn {
+    width: 40px;
+    max-width: 40px;
+    text-align : right;
+    font-size : 18px;
+}
+
+td.quantity,
+th.quantity {
+    width: 100px;
+    max-width: 100px;
+    word-break: break-all;
+    text-align: center;
+    font-size : 18px;
+}
+
+td.price,
+th.price {
+    width: 100px;
+    max-width: 100px;
+    word-break: break-all;
+    text-align: right;
+    font-size : 18px;
+}
+
+td.unit,
+th.unit {
+    width: 50px;
+    max-width: 50px;
+    word-break: break-all;
+    text-align: center;
+    font-size : 18px;
+}
+
+td.subtotal,
+th.subtotal {
+    width: 100px;
+    max-width: 100px;
+    word-break: break-all;
+    text-align: right;
+    font-size : 18px;
+}
+
+
+.centered {
+    text-align: center;
+    align-content: center;
+}
+
+
+.headtitle{
+    font-size: 20px;
+}
+
+.oid
+{
+font-size:18px;
+/* font-weight : bold; */
+}
+
+.odate
+{
+font-size:18px;
+margin-left : 480px;
+/* font-weight : bold; */
+}
+
+.ticket {
+    width: 786px;
+    max-width: 768px;
+}
+
+img {
+    max-width: inherit;
+    width: inherit;
+}
+
+#btnPrint{
+    background-color: rgb(236, 14, 14);
+    padding:15px 30px;
+    border-radius: 25%;
+    color:aliceblue;
+}
+
+@media print {
+    .hidden-print,
+    .hidden-print * {
+        display: none !important;
+    }
+}
+      </style>
+
+    </head>
+    <body>
+        <div class="ticket">
+            
+           
+
+            
+            <!-- <img src="{% static 'src/images/a4.png' %}" alt="inv_img" > -->
+
+            <span class="oid">Invoice : {{ord_obj.id}}</span>
+            <span class="odate">Date -{{ord_obj.created_at}}</span>
+
+
+            <br>
+            <span class="oid">
+            Name - {{ord_obj.ordered_by}}-{{ord_obj.mobile}}
+                </span>
+            <hr>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="sn">SN</th>
+                        <th class="description">ItemName</th>
+                        <th class="price">Price</th>
+                        <th class="quantity">Qty</th>
+                        <th class="unit">Unit</th>
+                        <th class="subtotal">Amount</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                {% for p in ord_obj.cart.cartproduct_set.all %}
+                    <tr>
+                        <td class="sn">{{forloop.counter}}</td>
+                        <td class="description">{{p.product.itemname}}</td>
+                        <td class="price">{{p.rate}}</td>
+                        <td class="quantity">{{p.quantity}}</td>
+                        <td class="unit">{{p.product.iunit}}</td>
+                        <td class="subtotal">{{p.subtotal}}</td>
+                        
+
+                    </tr>
+                {% endfor %}
+                    <tr>
+<!--                        <td class="sn"></td>-->
+                        <td colspan="5" style="text-align: right;"><strong>TOTAL </strong></td>
+                        <td class="subtotal">{{ord_obj.total}}</td>
+                    </tr>
+                    <!-- <tr>
+                        <td class="quantity"></td>
+                        <td class="description">Discount</td>
+                        <td class="price">{{ord_obj.discount}}</td>
+                    </tr> -->
+                    
+                </tbody>
+            </table>
+
+        </div>
+        <button id="btnPrint" class="hidden-print">Print</button>
+<!--        <script src="script.js"></script>-->
+    </body>
+    <script>
+      const $btnPrint = document.querySelector("#btnPrint");
+      $btnPrint.addEventListener("click", () => {
+      window.print();
+});
+    </script>
+</html>
